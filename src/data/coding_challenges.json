@@ -1,0 +1,22 @@
+[
+  {
+    "id": "basic-1",
+    "title": "Sum Two Numbers",
+    "description": "Write a function `solve(a, b)` that returns the sum of two numbers `a` and `b`.",
+    "starterCode": "function solve(a, b) {\n  // Your code here\n  return 0; \n}",
+    "testCases": [
+      { "input": [1, 2], "expectedOutput": 3 },
+      { "input": [5, -3], "expectedOutput": 2 },
+      { "input": [0, 0], "expectedOutput": 0 }
+    ]
+  },
+  {
+    "id": "basic-2",
+    "title": "Implement Custom Hook: useToggle",
+    "description": "Implement a custom React hook named `useToggle` that takes an initial boolean state and returns an array containing the current state and a function to toggle it. The `solve` function should *return* the hook itself.",
+    "starterCode": "import { useState } from 'react';\n\nfunction solve(initialValue) {\n  // Define the useToggle hook here\n  const useToggle = (initialState = false) => {\n    // Your hook logic here\n    const [state, setState] = useState(initialState);\n    const toggle = () => setState(!state);\n    return [state, toggle];\n  };\n  return useToggle; // Return the hook function\n}", 
+    "testCases": [
+      { "input": [true], "expectedOutput": "hookStructure" }
+    ]
+  }
+]

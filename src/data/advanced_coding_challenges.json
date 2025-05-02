@@ -1,0 +1,92 @@
+[
+  {
+    "id": "ts-conditional-types",
+    "title": "Implement TypeScript Conditional Types",
+    "description": "Create a conditional type called `ElementType<T>` that extracts the type of elements from an array type. For example, `ElementType<string[]>` should resolve to `string`, and `ElementType<number[]>` should resolve to `number`. If T is not an array, it should return `never`.",
+    "starterCode": "// Implement the ElementType<T> conditional type\ntype ElementType<T> = any; // Replace this with your implementation\n\n// Do not modify the code below\nfunction solve() {\n  // These should all be true\n  type Test1 = ElementType<string[]> extends string ? true : false;\n  type Test2 = ElementType<number[]> extends number ? true : false;\n  type Test3 = ElementType<boolean> extends never ? true : false;\n  \n  // Return the test results\n  return [true, true, true];\n}",
+    "testCases": [
+      { "input": [], "expectedOutput": [true, true, true] }
+    ]
+  },
+  {
+    "id": "ts-mapped-types",
+    "title": "Create a ReadOnly Mapped Type",
+    "description": "Implement a `ReadOnly<T>` mapped type that makes all properties of an object readonly. This should work similar to TypeScript's built-in `Readonly` utility type.",
+    "starterCode": "// Implement the ReadOnly<T> mapped type\ntype ReadOnly<T> = any; // Replace this with your implementation\n\n// Do not modify the code below\nfunction solve() {\n  interface User {\n    name: string;\n    age: number;\n  }\n  \n  // Test the ReadOnly type\n  const user: ReadOnly<User> = {\n    name: 'John',\n    age: 30\n  };\n  \n  // This should cause a type error (uncomment to test)\n  // user.name = 'Jane'; \n  \n  // Check if the properties are readonly\n  type Test1 = ReadOnly<User> extends { readonly name: string } ? true : false;\n  type Test2 = ReadOnly<User> extends { readonly age: number } ? true : false;\n  \n  return [true, true];\n}",
+    "testCases": [
+      { "input": [], "expectedOutput": [true, true] }
+    ]
+  },
+  {
+    "id": "ts-utility-types",
+    "title": "Implement Pick Utility Type",
+    "description": "Create a `MyPick<T, K>` utility type that works like TypeScript's built-in `Pick` type. It should construct a type with only the properties K from type T.",
+    "starterCode": "// Implement the MyPick<T, K> utility type\ntype MyPick<T, K extends keyof T> = any; // Replace this with your implementation\n\n// Do not modify the code below\nfunction solve() {\n  interface Todo {\n    title: string;\n    description: string;\n    completed: boolean;\n  }\n  \n  // Test the MyPick type\n  type TodoPreview = MyPick<Todo, 'title' | 'completed'>;\n  \n  // This should compile\n  const todo: TodoPreview = {\n    title: 'Clean room',\n    completed: false\n  };\n  \n  // These should be true\n  type Test1 = keyof TodoPreview extends 'title' | 'completed' ? true : false;\n  type Test2 = 'description' extends keyof TodoPreview ? false : true;\n  \n  return [true, true];\n}",
+    "testCases": [
+      { "input": [], "expectedOutput": [true, true] }
+    ]
+  },
+  {
+    "id": "react-use-state-hook",
+    "title": "Implement a Simple Counter with useState",
+    "description": "Create a simple React counter component that uses the useState hook. The component should render a count value and two buttons: one to increment and one to decrement the count.",
+    "starterCode": "import React, { useState } from 'react';\n\nfunction solve() {\n  // Implement the Counter component here\n  const Counter = () => {\n    // Your code here\n    \n    return (\n      <div>\n        {/* Your JSX here */}\n      </div>\n    );\n  };\n  \n  // Return the component for testing\n  return Counter;\n}",
+    "testCases": [
+      { "input": [], "expectedOutput": "reactComponent" }
+    ]
+  },
+  {
+    "id": "react-use-effect-hook",
+    "title": "Implement Data Fetching with useEffect",
+    "description": "Create a React component that fetches data from an API when it mounts. Use the useEffect hook to perform the data fetching and useState to store the fetched data. The component should display a loading state while fetching and the data once it's loaded.",
+    "starterCode": "import React, { useState, useEffect } from 'react';\n\nfunction solve() {\n  // This is a mock API function that returns a promise\n  const fetchData = () => {\n    return new Promise(resolve => {\n      setTimeout(() => {\n        resolve({ name: 'John Doe', age: 30 });\n      }, 1000);\n    });\n  };\n\n  // Implement the DataFetcher component here\n  const DataFetcher = () => {\n    // Your code here\n    \n    return (\n      <div>\n        {/* Your JSX here */}\n      </div>\n    );\n  };\n  \n  // Return the component for testing\n  return DataFetcher;\n}",
+    "testCases": [
+      { "input": [], "expectedOutput": "reactComponent" }
+    ]
+  },
+  {
+    "id": "react-use-reducer-hook",
+    "title": "Implement a Todo List with useReducer",
+    "description": "Create a React component that implements a simple todo list using the useReducer hook. The component should allow adding new todos, toggling todo completion status, and removing todos.",
+    "starterCode": "import React, { useReducer } from 'react';\n\nfunction solve() {\n  // Define your reducer and initial state here\n  \n  // Implement the TodoList component here\n  const TodoList = () => {\n    // Your code here\n    \n    return (\n      <div>\n        {/* Your JSX here */}\n      </div>\n    );\n  };\n  \n  // Return the component for testing\n  return TodoList;\n}",
+    "testCases": [
+      { "input": [], "expectedOutput": "reactComponent" }
+    ]
+  },
+  {
+    "id": "react-use-memo-hook",
+    "title": "Optimize Performance with useMemo",
+    "description": "Create a React component that displays a list of filtered items based on a search term. Use the useMemo hook to optimize the filtering operation so it only runs when the search term or the list changes.",
+    "starterCode": "import React, { useState, useMemo } from 'react';\n\nfunction solve() {\n  // Sample data\n  const items = [\n    { id: 1, name: 'Apple' },\n    { id: 2, name: 'Banana' },\n    { id: 3, name: 'Cherry' },\n    { id: 4, name: 'Date' },\n    { id: 5, name: 'Elderberry' }\n  ];\n\n  // Implement the FilteredList component here\n  const FilteredList = () => {\n    // Your code here\n    \n    return (\n      <div>\n        {/* Your JSX here */}\n      </div>\n    );\n  };\n  \n  // Return the component for testing\n  return FilteredList;\n}",
+    "testCases": [
+      { "input": [], "expectedOutput": "reactComponent" }
+    ]
+  },
+  {
+    "id": "react-use-callback-hook",
+    "title": "Optimize Child Components with useCallback",
+    "description": "Create a React component that renders a list of items and a button to add new items. Use the useCallback hook to memoize the add item function to prevent unnecessary re-renders of child components.",
+    "starterCode": "import React, { useState, useCallback } from 'react';\n\nfunction solve() {\n  // Implement the ItemList component here\n  const ItemList = () => {\n    // Your code here\n    \n    // Child component that should only re-render when necessary\n    const Item = React.memo(({ text, onRemove }) => {\n      console.log(`Rendering item: ${text}`);\n      return (\n        <li>\n          {text} <button onClick={onRemove}>Remove</button>\n        </li>\n      );\n    });\n    \n    return (\n      <div>\n        {/* Your JSX here */}\n      </div>\n    );\n  };\n  \n  // Return the component for testing\n  return ItemList;\n}",
+    "testCases": [
+      { "input": [], "expectedOutput": "reactComponent" }
+    ]
+  },
+  {
+    "id": "react-custom-hook",
+    "title": "Create a Custom useLocalStorage Hook",
+    "description": "Implement a custom React hook called useLocalStorage that synchronizes a state value with localStorage. The hook should work similar to useState but persist the value in localStorage.",
+    "starterCode": "import { useState, useEffect } from 'react';\n\nfunction solve() {\n  // Implement the useLocalStorage hook here\n  const useLocalStorage = (key, initialValue) => {\n    // Your code here\n    \n    return []; // Replace with your implementation\n  };\n  \n  // Return the hook for testing\n  return useLocalStorage;\n}",
+    "testCases": [
+      { "input": [], "expectedOutput": "reactHook" }
+    ]
+  },
+  {
+    "id": "ts-react-integration",
+    "title": "Type-Safe React Component Props",
+    "description": "Create a TypeScript React component with properly typed props. The component should accept a list of items, a filter function, and a render prop for customizing how each item is displayed.",
+    "starterCode": "import React from 'react';\n\nfunction solve() {\n  // Define your types here\n  \n  // Implement the FilteredList component here\n  const FilteredList = () => {\n    // Your implementation here\n    \n    return null;\n  };\n  \n  // Return the component for testing\n  return FilteredList;\n}",
+    "testCases": [
+      { "input": [], "expectedOutput": "reactComponent" }
+    ]
+  }
+]

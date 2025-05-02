@@ -1,0 +1,101 @@
+/* src/styles/QuestionCard.css */
+.question-card {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background-color: var(--light);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(12, 10, 62, 0.08);
+  transition: all var(--transition-speed);
+  position: relative;
+  overflow: hidden;
+}
+
+.question-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  background-color: var(--primary);
+  border-radius: 12px 0 0 12px;
+}
+
+.question-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(12, 10, 62, 0.12);
+}
+
+.question-card h2 {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  color: var(--dark);
+  line-height: 1.5;
+}
+
+.question-card p {
+  color: var(--dark);
+  opacity: 0.8;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.question-card ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 1.5rem;
+}
+
+.question-card li {
+  margin-bottom: 1rem;
+  background-color: rgba(53, 167, 255, 0.05);
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  transition: all var(--transition-speed);
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.question-card li:hover {
+  background-color: rgba(53, 167, 255, 0.1);
+  transform: translateX(5px);
+}
+
+.question-card li.selected {
+  background-color: rgba(53, 167, 255, 0.15);
+  border-color: var(--secondary);
+}
+
+.question-card label {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1.15rem;
+}
+
+.question-card input[type="radio"] {
+  margin-right: 10px;
+}
+
+.topic-badge {
+  display: inline-block;
+  background-color: rgba(249, 110, 70, 0.1);
+  color: var(--primary);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-right: 0.8rem;
+}
+
+.difficulty-badge {
+  display: inline-block;
+  background-color: rgba(138, 206, 0, 0.1);
+  color: var(--accent);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}

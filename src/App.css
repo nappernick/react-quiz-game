@@ -1,0 +1,181 @@
+/* src/App.css */
+header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid rgba(12, 10, 62, 0.1);
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.badge {
+  background: var(--accent);
+  color: var(--dark);
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(138, 206, 0, 0.2);
+  transition: all var(--transition-speed);
+}
+
+.badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(138, 206, 0, 0.3);
+}
+
+.restart {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--primary);
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: all var(--transition-speed);
+  box-shadow: none;
+}
+
+.restart:hover {
+  background-color: rgba(249, 110, 70, 0.1);
+  transform: translateY(0);
+}
+
+.review {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: rgba(53, 167, 255, 0.05);
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(12, 10, 62, 0.05);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.explanation {
+  background: rgba(249, 110, 70, 0.05);
+  padding: 1rem;
+  border-left: 4px solid var(--primary);
+  margin: 1.5rem 0;
+  border-radius: 0 8px 8px 0;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  transition: all var(--transition-speed);
+}
+
+.explanation:hover {
+  background: rgba(249, 110, 70, 0.1);
+  transform: translateX(5px);
+}
+
+.confidence {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background-color: rgba(12, 10, 62, 0.03);
+  border-radius: 8px;
+}
+
+.confidence p {
+  font-weight: 500;
+  margin-top: 0;
+  color: var(--dark);
+}
+
+.confidence label {
+  margin-right: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  transition: transform var(--transition-speed);
+}
+
+.confidence label:hover {
+  transform: translateY(-2px);
+}
+
+/* Add styles for correct/incorrect answers */
+.correct-answer {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.incorrect-answer {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* Stats styling */
+.stats-container {
+  display: flex;
+  gap: 1rem;
+  font-size: 1.1rem;
+}
+
+.stats-container > div {
+  padding: 0.5rem 0;
+  transition: all var(--transition-speed);
+}
+
+.stats-container > div:hover {
+  transform: translateY(-2px);
+}
+
+.score-display {
+  color: var(--secondary);
+  font-weight: 700;
+}
+
+.streak-display {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+/* Navigation styling */
+.game-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(12, 10, 62, 0.1);
+}
+
+.game-nav button {
+  background-color: rgba(53, 167, 255, 0.1);
+  color: var(--dark);
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  margin-top: 0;
+}
+
+.game-nav button:hover {
+  background-color: rgba(53, 167, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.game-nav button.active {
+  background-color: var(--secondary);
+  color: var(--light);
+}
+
+.game-nav button.active:hover {
+  background-color: var(--secondary);
+  box-shadow: 0 6px 8px rgba(53, 167, 255, 0.25);
+}

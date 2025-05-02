@@ -1,0 +1,302 @@
+[
+    {
+      "id": "event-loop",
+      "title": "Node.js Event Loop Phases",
+      "steps": ["timers", "pending callbacks", "idle/prepare", "poll", "check", "close callbacks"]
+    },
+    {
+      "id": "nodejs-cli-flags",
+      "title": "Common Node.js CLI Flags",
+      "steps": ["--max-old-space-size", "--trace-gc", "--expose-gc", "--experimental-modules"]
+    },
+    {
+      "id": "nodejs-heap-limits",
+      "title": "Managing Node.js Heap Limits",
+      "steps": ["default heap size detection", "heap expansion thresholds", "--max-old-space-size usage", "monitor with process.memoryUsage()"]
+    },
+    {
+      "id": "libuv-threadpool-workflow",
+      "title": "libuv Thread Pool Workflow",
+      "steps": ["uv_loop_init", "uv_queue_work", "threadpool execution", "uv_async_send", "main-loop callback"]
+    },
+    {
+      "id": "worker-threads-vs-cluster",
+      "title": "Worker Threads vs Cluster Module",
+      "steps": ["spawn Worker Threads", "message passing", "fork Cluster workers", "round-robin load balancing"]
+    },
+    {
+      "id": "nodejs-esm-support",
+      "title": "Enabling ESM Support in Node.js",
+      "steps": ["use --experimental-modules", "use .mjs extension", "set \"type\": \"module\" in package.json", "import/export syntax"]
+    },
+    {
+      "id": "nodejs-module-resolution",
+      "title": "Node.js Module Resolution Algorithm",
+      "steps": ["core modules lookup", "file modules lookup", "node_modules directories", "package.json main field"]
+    },
+    {
+      "id": "nodejs-profiling",
+      "title": "Profiling a Node.js Process",
+      "steps": ["start with --inspect", "connect Chrome DevTools", "collect CPU profile", "take heap snapshot"]
+    },
+    {
+      "id": "nodejs-threadpool-size",
+      "title": "Configuring libuv Thread Pool Size",
+      "steps": ["default UV_THREADPOOL_SIZE=4", "set UV_THREADPOOL_SIZE env var", "measure I/O throughput", "optimize concurrency"]
+    },
+    {
+      "id": "child-process-vs-worker-threads",
+      "title": "Child Process vs Worker Threads",
+      "steps": ["fork child_process", "spawn new process", "create Worker Thread", "share memory via SharedArrayBuffer"]
+    },
+    {
+      "id": "tsconfig-strictness",
+      "title": "Enabling Strict Mode in tsconfig",
+      "steps": ["strict", "noImplicitAny", "strictNullChecks", "strictFunctionTypes"]
+    },
+    {
+      "id": "tsconfig-directories",
+      "title": "Configuring Source and Output Directories",
+      "steps": ["rootDir", "outDir", "baseUrl", "paths"]
+    },
+    {
+      "id": "tsconfig-path-mapping",
+      "title": "Setting Up Path Aliases in TypeScript",
+      "steps": ["define baseUrl", "add paths aliases", "update imports", "verify resolution"]
+    },
+    {
+      "id": "project-references-build",
+      "title": "Building with TypeScript Project References",
+      "steps": ["enable composite", "add references", "run tsc --build", "inspect .tsbuildinfo"]
+    },
+    {
+      "id": "utility-types-categories",
+      "title": "Core TypeScript Utility Types",
+      "steps": ["Partial<T>", "Required<T>", "Readonly<T>", "Pick<T,K> & Omit<T,K>"]
+    },
+    {
+      "id": "conditional-types-evaluation",
+      "title": "Defining and Evaluating Conditional Types",
+      "steps": ["write T extends U ? X : Y", "apply to single type", "apply to union type", "control distributive behavior"]
+    },
+    {
+      "id": "infer-keyword-usage",
+      "title": "Using the infer Keyword in Conditional Types",
+      "steps": ["declare conditional type", "use infer to capture subtype", "reuse inferred type", "limit inference scope"]
+    },
+    {
+      "id": "mapped-types-remapping",
+      "title": "Remapping Keys with Mapped Types",
+      "steps": ["define mapped type", "use as for key remapping", "filter keys with keyof", "transform value types"]
+    },
+    {
+      "id": "declaration-merging",
+      "title": "Augmenting Types via Declaration Merging",
+      "steps": ["declare interface", "declare namespace", "augment existing declarations", "access merged members"]
+    },
+    {
+      "id": "decorators-metadata-reflection",
+      "title": "Enabling Runtime Metadata with Decorators",
+      "steps": ["enable experimentalDecorators", "enable emitDecoratorMetadata", "apply class decorator", "use Reflect API"]
+    },
+    {
+      "id": "distributive-conditional-types",
+      "title": "Understanding Distributive Conditional Types",
+      "steps": ["write T extends U ? X : Y", "apply on union", "observe distribution", "wrap in tuple to prevent"]
+    },
+    {
+      "id": "flatten-array-type",
+      "title": "Creating a Recursive Flatten Array Type",
+      "steps": ["base array check", "conditional recursion", "infer inner element", "rebuild flattened type"]
+    },
+    {
+      "id": "unwrap-promise-type",
+      "title": "Unwrapping Promise Types with Awaited<T>",
+      "steps": ["check T extends Promise", "infer inner type", "return inner type", "fallback to original"]
+    },
+    {
+      "id": "pick-omit-utility",
+      "title": "Selecting and Omitting Properties in Types",
+      "steps": ["use Pick<T,K>", "use Omit<T,K>", "define key set K", "validate resulting type"]
+    },
+    {
+      "id": "record-utility",
+      "title": "Constructing Mapped Objects with Record<K,V>",
+      "steps": ["define key union K", "define value type V", "create Record<K,V>", "ensure type consistency"]
+    },
+    {
+      "id": "exclude-extract-utility",
+      "title": "Filtering Unions with Exclude & Extract",
+      "steps": ["use Exclude<U,T>", "use Extract<U,T>", "define U & T", "verify filtered union"]
+    },
+    {
+      "id": "es6-features-introduction",
+      "title": "Key ES6 Language Features",
+      "steps": ["arrow functions", "object destructuring", "template literals", "default parameters"]
+    },
+    {
+      "id": "event-loop-task-types",
+      "title": "Microtasks vs Macrotasks in JavaScript",
+      "steps": ["macro-tasks queue", "micro-tasks queue", "process microtasks before next macrotask", "use process.nextTick"]
+    },
+    {
+      "id": "tsc-phases",
+      "title": "The Three Phases of tsc Compilation",
+      "steps": ["Parsing", "Binding", "Type Checking", "Emit"]
+    },
+    {
+      "id": "build-tools-flags",
+      "title": "Useful tsc Command-Line Flags",
+      "steps": ["--diagnostics", "--traceResolution", "--listEmittedFiles", "--incremental"]
+    },
+    {
+      "id": "incremental-compilation",
+      "title": "Configuring Incremental Compilation",
+      "steps": ["enable incremental", "generate tsbuildinfo", "modify source file", "re-run tsc"]
+    },
+    {
+      "id": "declaration-file-generation",
+      "title": "Generating .d.ts Declaration Files",
+      "steps": ["enable declaration", "set declarationDir", "compile to .d.ts", "consume declarations"]
+    },
+    {
+      "id": "function-vs-class-component",
+      "title": "Function vs Class Components in React",
+      "steps": ["define function component", "define class component", "manage state vs this.state", "use hooks vs lifecycle methods"]
+    },
+    {
+      "id": "jsx-transform-settings",
+      "title": "JSX Transform Options in tsconfig",
+      "steps": ["jsx: react-jsx", "jsx: preserve", "import React if needed", "compile JSX to JS"]
+    },
+    {
+      "id": "react-component-lifecycle",
+      "title": "React Class Component Lifecycle",
+      "steps": ["constructor → render → componentDidMount", "render → componentDidUpdate", "componentWillUnmount"]
+    },
+    {
+      "id": "useState-flow",
+      "title": "Data Flow with useState Hook",
+      "steps": ["call useState(initial)", "invoke setter", "trigger re-render", "preserve state"]
+    },
+    {
+      "id": "useEffect-lifecycle",
+      "title": "Effect Hook Execution Sequence",
+      "steps": ["run after first render", "cleanup before unmount or re-run", "detect changes via dependency array", "optional sync vs async"]
+    },
+    {
+      "id": "useLayoutEffect-vs-useEffect",
+      "title": "useLayoutEffect vs useEffect Timing",
+      "steps": ["useLayoutEffect runs before paint", "useEffect runs after paint", "avoid layout shift", "best for DOM reads"]
+    },
+    {
+      "id": "useReducer-flow",
+      "title": "State Management with useReducer",
+      "steps": ["define reducer", "initialize with useReducer", "dispatch actions", "process updates in reducer"]
+    },
+    {
+      "id": "custom-hooks-creation",
+      "title": "Building Custom React Hooks",
+      "steps": ["name start with use", "invoke other hooks internally", "encapsulate reusable logic", "return API for components"]
+    },
+    {
+      "id": "useContext-flow",
+      "title": "Consuming Context with useContext",
+      "steps": ["create context", "wrap Provider", "consume via useContext", "update Provider value"]
+    },
+    {
+      "id": "useMemo-vs-useCallback",
+      "title": "Choosing Between useMemo and useCallback",
+      "steps": ["useMemo for values", "useCallback for functions", "provide dependency array", "prevent unnecessary work"]
+    },
+    {
+      "id": "useRef-usage",
+      "title": "Managing Mutable References with useRef",
+      "steps": ["initialize with useRef", "attach ref to element", "access ref.current", "preserve value across renders"]
+    },
+    {
+      "id": "advanced-hooks-suite",
+      "title": "React 18 Concurrency Hooks",
+      "steps": ["startTransition for low-priority", "check isPending", "defer with useDeferredValue", "automatic batching"]
+    },
+    {
+      "id": "react-memoization",
+      "title": "Optimizing Re-renders with Memoization",
+      "steps": ["wrap with React.memo", "stabilize props", "use useCallback/useMemo", "verify with Profiler"]
+    },
+    {
+      "id": "code-splitting-lazy-loading",
+      "title": "Dynamic Import and Lazy Loading",
+      "steps": ["import with React.lazy", "wrap in Suspense", "provide fallback UI", "reduce initial bundle size"]
+    },
+    {
+      "id": "suspense-fallback",
+      "title": "Handling Loading States with Suspense",
+      "steps": ["define Suspense boundary", "set fallback prop", "lazy load component/data", "render fallback during load"]
+    },
+    {
+      "id": "concurrent-mode-flow",
+      "title": "React Concurrent Mode Workflow",
+      "steps": ["createRoot API", "enable concurrent features", "schedule updates", "use startTransition"]
+    },
+    {
+      "id": "automatic-batching",
+      "title": "Automatic Batching in React 18",
+      "steps": ["batch in event handlers", "batch in timeouts", "batch in promises", "inspect with DevTools Profiler"]
+    },
+    {
+      "id": "error-boundary-creation",
+      "title": "Implementing React Error Boundaries",
+      "steps": ["extend React.Component", "implement getDerivedStateFromError", "implement componentDidCatch", "render fallback UI"]
+    },
+    {
+      "id": "compound-components-pattern",
+      "title": "Building Compound Component Patterns",
+      "steps": ["create parent component", "define shared context", "implement child components", "compose UI pieces"]
+    },
+    {
+      "id": "render-props-pattern",
+      "title": "Using the Render Props Pattern",
+      "steps": ["define render prop API", "pass function as child", "invoke with data", "return JSX"]
+    },
+    {
+      "id": "higher-order-components",
+      "title": "Creating Higher-Order Components (HOCs)",
+      "steps": ["write HOC function", "wrap original component", "inject enhanced props", "return new component"]
+    },
+    {
+      "id": "context-api-usage",
+      "title": "Leveraging React Context API",
+      "steps": ["createContext()", "provide value via Provider", "consume with useContext or Consumer", "update context value"]
+    },
+    {
+      "id": "react-testing-library-workflow",
+      "title": "Testing with React Testing Library",
+      "steps": ["render()", "queryByRole/getByText", "fireEvent/userEvent", "assert DOM changes"]
+    },
+    {
+      "id": "e2e-testing-cypress-setup",
+      "title": "Setting Up Cypress for E2E Tests",
+      "steps": ["install Cypress", "write spec files", "use cy.visit()", "interact with cy.get()", "assert with should()"]
+    },
+    {
+      "id": "jest-vitest-comparison",
+      "title": "Comparing Jest and Vitest Runners",
+      "steps": ["configure Jest", "configure Vitest", "write sample tests", "benchmark performance", "choose runner"]
+    },
+    {
+      "id": "graphql-codegen-flow",
+      "title": "Generating Types from GraphQL Schema",
+      "steps": ["install @graphql-codegen/cli", "create codegen.yml", "run codegen", "import generated types"]
+    },
+    {
+      "id": "trpc-end-to-end-safety",
+      "title": "Implementing End-to-End Type Safety with tRPC",
+      "steps": ["define router procedures", "export types with inferProcedureOutput", "set up client hooks", "call queries/mutations with full types"]
+    },
+    {
+      "id": "zod-runtime-validation",
+      "title": "Runtime Validation and TS Inference with Zod",
+      "steps": ["install zod", "define schema", "infer TS type", "parse/validate data"]
+    }
+  ]

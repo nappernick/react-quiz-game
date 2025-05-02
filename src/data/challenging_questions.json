@@ -1,0 +1,548 @@
+[
+    {
+      "question": "What is the return type of `ReturnType<() => Promise<number>>`?",
+      "options": [
+        "unknown",
+        "Promise<number>",
+        "never",
+        "number"
+      ],
+      "correctIndex": 1,
+      "explanation": "`ReturnType` does not unwrap Promises; it gives `Promise<number>`. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    },
+    {
+      "question": "What does `Awaited<Promise<string>>` evaluate to?",
+      "options": [
+        "never",
+        "unknown",
+        "string",
+        "Promise<string>"
+      ],
+      "correctIndex": 2,
+      "explanation": "`Awaited` unwraps one level of Promise to the inner type, here `string`. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    },
+    {
+      "question": "What is `InstanceType<never>`?",
+      "options": [
+        "never",
+        "compile-time error",
+        "unknown",
+        "any"
+      ],
+      "correctIndex": 0,
+      "explanation": "`never` produces `never` since no constructor exists. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    },
+    {
+      "question": "What is the result of `Parameters<any>`?",
+      "options": [
+        "any[]",
+        "never",
+        "unknown[]",
+        "compile-time error"
+      ],
+      "correctIndex": 2,
+      "explanation": "`Parameters<any>` defaults to `unknown[]`. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    },
+    {
+      "question": "What does `ConstructorParameters<ErrorConstructor>` yield?",
+      "options": [
+        "string[]",
+        "[any?]",
+        "never",
+        "[string?]"
+      ],
+      "correctIndex": 3,
+      "explanation": "Extracts the constructor args of `Error`, which is an optional `string`. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    },
+    {
+      "question": "Using `ThisParameterType<(this:Date)=>void>` yields what type?",
+      "options": [
+        "void",
+        "never",
+        "unknown",
+        "Date"
+      ],
+      "correctIndex": 3,
+      "explanation": "`ThisParameterType` extracts the `this` context type, here `Date`. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    },
+    {
+      "question": "What signature results from `OmitThisParameter<(this:Foo,x:number)=>void>`?",
+      "options": [
+        "Foo",
+        "(this:Foo,x:number)=>void",
+        "(x:number)=>void",
+        "never"
+      ],
+      "correctIndex": 2,
+      "explanation": "`OmitThisParameter` removes the `this` binding, leaving a normal function. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    },
+    {
+      "question": "What does `Pick<{a:number,b:string}, 'a'>` produce?",
+      "options": [
+        "{b:string}",
+        "never",
+        "{a:number}",
+        "{a:number,b:string}"
+      ],
+      "correctIndex": 2,
+      "explanation": "`Pick` selects only the `'a'` property. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    },
+    {
+      "question": "What is `Partial<{x:number}>`?",
+      "options": [
+        "{x?:number}",
+        "{x:number|null}",
+        "{x:number}",
+        "never"
+      ],
+      "correctIndex": 0,
+      "explanation": "`Partial` makes all props optional. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    },
+    {
+      "question": "What is `Required<{y?:string}>`?",
+      "options": [
+        "{y:string|undefined}",
+        "never",
+        "{y:string}",
+        "{y?:string}"
+      ],
+      "correctIndex": 2,
+      "explanation": "`Required` makes optional props required. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    },
+    {
+      "question": "What type does `Readonly<{k:number}>` produce?",
+      "options": [
+        "{k?:number}",
+        "{k:number}",
+        "never",
+        "{readonly k:number}"
+      ],
+      "correctIndex": 3,
+      "explanation": "`Readonly` applies `readonly` to all properties. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    },
+    {
+      "question": "What is `Record<'x'|'y', boolean>`?",
+      "options": [
+        "never",
+        "boolean[]",
+        "{x?:boolean,y?:boolean}",
+        "{x:boolean,y:boolean}"
+      ],
+      "correctIndex": 3,
+      "explanation": "`Record` maps given keys to the specified type. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    },
+    {
+      "question": "What does `NonNullable<string|null>` yield?",
+      "options": [
+        "never",
+        "string|null",
+        "string",
+        "null"
+      ],
+      "correctIndex": 2,
+      "explanation": "`NonNullable` removes `null` and `undefined`. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    },
+    {
+      "question": "What is `Exclude<'a'|'b','a'>`?",
+      "options": [
+        "never",
+        "'a'|'b'",
+        "'a'",
+        "'b'"
+      ],
+      "correctIndex": 3,
+      "explanation": "`Exclude` removes types assignable to the second parameter. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    },
+    {
+      "question": "What does `Extract<'x'|'y','y'|'z'>` yield?",
+      "options": [
+        "'y'",
+        "'x'",
+        "'x'|'y'",
+        "never"
+      ],
+      "correctIndex": 0,
+      "explanation": "`Extract` picks types assignable to both. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    },
+    {
+      "question": "What is `Uppercase<'foo'>`?",
+      "options": [
+        "never",
+        "'FOO'",
+        "string",
+        "'foo'"
+      ],
+      "correctIndex": 1,
+      "explanation": "`Uppercase` transforms literal to uppercase. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    },
+    {
+      "question": "What does `Lowercase<'BAR'>` produce?",
+      "options": [
+        "'BAR'",
+        "never",
+        "string",
+        "'bar'"
+      ],
+      "correctIndex": 3,
+      "explanation": "`Lowercase` transforms literal to lowercase. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    },
+    {
+      "question": "What is `Capitalize<'baz'>`?",
+      "options": [
+        "'baz'",
+        "never",
+        "'Baz'",
+        "string"
+      ],
+      "correctIndex": 2,
+      "explanation": "`Capitalize` uppercases the first char. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    },
+    {
+      "question": "What does `Uncapitalize<'Qux'>` yield?",
+      "options": [
+        "never",
+        "string",
+        "'Qux'",
+        "'qux'"
+      ],
+      "correctIndex": 3,
+      "explanation": "`Uncapitalize` lowercases the first char. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    },
+    {
+      "question": "What is `keyof any` in TypeScript?",
+      "options": [
+        "string|number|symbol",
+        "string",
+        "any",
+        "never"
+      ],
+      "correctIndex": 0,
+      "explanation": "`keyof any` yields the union of all key types. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    },
+    {
+      "question": "What does `T[number]` yield for `type T=[1,2,3]`?",
+      "options": [
+        "1|2|3",
+        "any",
+        "never",
+        "number"
+      ],
+      "correctIndex": 0,
+      "explanation": "Indexing a tuple by `number` gives a union of its element types. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    },
+    {
+      "question": "In React TS, what is the inferred state type of `const [s,setS] = useState()`?",
+      "options": [
+        "undefined",
+        "string",
+        "null",
+        "any"
+      ],
+      "correctIndex": 0,
+      "explanation": "Without an initial value, state is inferred as `undefined`. ",
+      "difficulty": 5,
+      "topic": "React & TypeScript"
+    },
+    {
+      "question": "In React 18 StrictMode, how many times is a lazy initializer for `useState` called in development?",
+      "options": [
+        "Once",
+        "Thrice",
+        "Never",
+        "Twice"
+      ],
+      "correctIndex": 3,
+      "explanation": "StrictMode mounts, unmounts, and remounts to help find impurities. ",
+      "difficulty": 5,
+      "topic": "React"
+    },
+    {
+      "question": "What error arises from calling a Hook inside a loop?",
+      "options": [
+        "SyntaxError",
+        "No error",
+        "Invalid Hook Call Warning",
+        "TypeError"
+      ],
+      "correctIndex": 2,
+      "explanation": "Hooks must be at the top level; otherwise you get an invalid hook call. ",
+      "difficulty": 5,
+      "topic": "React"
+    },
+    {
+      "question": "What does an empty dependency array `[]` for `useEffect` guarantee?",
+      "options": [
+        "Never run",
+        "Run once after mount",
+        "Run every render",
+        "Run only on unmount"
+      ],
+      "correctIndex": 1,
+      "explanation": "`useEffect(...,[])` runs once after the first render. ",
+      "difficulty": 5,
+      "topic": "React"
+    },
+    {
+      "question": "Which Hook would you use to memoize a callback function?",
+      "options": [
+        "useMemo",
+        "useReducer",
+        "useCallback",
+        "useRef"
+      ],
+      "correctIndex": 2,
+      "explanation": "`useCallback` returns a memoized callback, while `useMemo` caches return values. ",
+      "difficulty": 5,
+      "topic": "React"
+    },
+    {
+      "question": "What is the type of `ref.current` after `const ref = useRef<HTMLDivElement>(null)`?",
+      "options": [
+        "never",
+        "any",
+        "HTMLDivElement",
+        "HTMLDivElement|null"
+      ],
+      "correctIndex": 3,
+      "explanation": "When initialized with `null`, `current` is `HTMLDivElement|null`. ",
+      "difficulty": 5,
+      "topic": "React & TypeScript"
+    },
+    {
+      "question": "What does `useMemo(()=>x,[])` guarantee?",
+      "options": [
+        "`x` recomputed each render",
+        "compile error",
+        "`x` is computed once",
+        "`x` never computed"
+      ],
+      "correctIndex": 2,
+      "explanation": "`useMemo` with `[]` only computes once. ",
+      "difficulty": 5,
+      "topic": "React"
+    },
+    {
+      "question": "What is the default type of `React.createContext` when no generic is provided?",
+      "options": [
+        "never",
+        "any",
+        "undefined",
+        "null"
+      ],
+      "correctIndex": 2,
+      "explanation": "`createContext()` defaults to `Context<undefined>`. ",
+      "difficulty": 5,
+      "topic": "React & TypeScript"
+    },
+    {
+      "question": "Which type covers valid JSX children?",
+      "options": [
+        "React.ReactNode",
+        "JSX.Element",
+        "any",
+        "object"
+      ],
+      "correctIndex": 0,
+      "explanation": "`ReactNode` includes strings, numbers, elements, arrays, and fragments. ",
+      "difficulty": 5,
+      "topic": "React & TypeScript"
+    },
+    {
+      "question": "What TS type describes event handlers like `onClick`?",
+      "options": [
+        "Event",
+        "React.MouseEvent<HTMLButtonElement>",
+        "any",
+        "MouseEvent"
+      ],
+      "correctIndex": 1,
+      "explanation": "React\u2019s SyntheticEvent system uses `React.MouseEvent` generic over the element. ",
+      "difficulty": 5,
+      "topic": "React & TypeScript"
+    },
+    {
+      "question": "What\u2019s the difference between `JSX.Element` and `React.ReactElement`?",
+      "options": [
+        "They\u2019re aliases",
+        "No difference",
+        "`ReactElement` generic",
+        "`JSX.Element` only for TSX"
+      ],
+      "correctIndex": 2,
+      "explanation": "`ReactElement` is a generic interface; `JSX.Element` is its non-generic alias. ",
+      "difficulty": 5,
+      "topic": "React & TypeScript"
+    },
+    {
+      "question": "What happens if you call `useEffect` without a cleanup return?",
+      "options": [
+        "No cleanup step",
+        "Automatic cleanup",
+        "Compile error",
+        "Runtime error"
+      ],
+      "correctIndex": 0,
+      "explanation": "If no cleanup function is returned, React skips cleanup. ",
+      "difficulty": 5,
+      "topic": "React"
+    },
+    {
+      "question": "Which Hook should not be called inside a class component?",
+      "options": [
+        "useState",
+        "Both 2 and 3",
+        "Any Hook",
+        "useEffect"
+      ],
+      "correctIndex": 1,
+      "explanation": "Hooks only work in function components or other Hooks. ",
+      "difficulty": 5,
+      "topic": "React"
+    },
+    {
+      "question": "What does `useContext(MyContext)` return when no Provider exists above?",
+      "options": [
+        "undefined",
+        "null",
+        "Default value",
+        "error"
+      ],
+      "correctIndex": 2,
+      "explanation": "It returns the context\u2019s default value. ",
+      "difficulty": 5,
+      "topic": "React & TypeScript"
+    },
+    {
+      "question": "How do you type a forwardRef component in TS?",
+      "options": [
+        "`React.FC<Props>`",
+        "`any`",
+        "`unknown`",
+        "`React.forwardRef<HTMLDivElement,Props>`"
+      ],
+      "correctIndex": 3,
+      "explanation": "Use `forwardRef<RefType,Props>`. ",
+      "difficulty": 5,
+      "topic": "React & TypeScript"
+    },
+    {
+      "question": "What effect does `StrictMode` have on `useEffect` in React 18?",
+      "options": [
+        "No effect",
+        "Double-run setup+cleanup",
+        "Skip first run",
+        "Error"
+      ],
+      "correctIndex": 1,
+      "explanation": "In dev, it runs setup and cleanup twice for safety. ",
+      "difficulty": 5,
+      "topic": "React"
+    },
+    {
+      "question": "Which utility type creates an object type from union members as keys?",
+      "options": [
+        "Record<K,V>",
+        "Partial<T>",
+        "Pick<T,K>",
+        "Required<T>"
+      ],
+      "correctIndex": 0,
+      "explanation": "`Record<'a'|'b',T>` makes `{a:T,b:T}`. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    },
+    {
+      "question": "How does `Extract<string|number, number>` behave?",
+      "options": [
+        "string",
+        "number",
+        "any",
+        "never"
+      ],
+      "correctIndex": 1,
+      "explanation": "`Extract` keeps only `number`. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    },
+    {
+      "question": "What is the output of `Exclude<'x'|'y', string>`?",
+      "options": [
+        "any",
+        "'x'|'y'",
+        "string",
+        "never"
+      ],
+      "correctIndex": 3,
+      "explanation": "Both `'x'` and `'y'` extend `string`, so excluded \u2192 `never`. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    },
+    {
+      "question": "Which TS operator creates a union of object values from keys?",
+      "options": [
+        "Omit",
+        "keyof T",
+        "T[keyof T]",
+        "Pick"
+      ],
+      "correctIndex": 2,
+      "explanation": "`T[keyof T]` yields a union of property types. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    },
+    {
+      "question": "What is `Awaited<string>`?",
+      "options": [
+        "unknown",
+        "Promise<string>",
+        "string",
+        "never"
+      ],
+      "correctIndex": 2,
+      "explanation": "`Awaited` leaves non-Promise types unchanged. ",
+      "difficulty": 5,
+      "topic": "TypeScript"
+    }
+  ]

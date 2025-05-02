@@ -1,0 +1,1354 @@
+[
+  {
+    "question": "What are React Hooks and why were they introduced?",
+    "options": [
+      "Functions to manipulate the DOM directly",
+      "Functions that let you \"hook into\" React state and lifecycle features in functional components",
+      "A replacement for JSX syntax",
+      "A built-in CSS-in-JS solution"
+    ],
+    "correctIndex": 1,
+    "explanation": "React Hooks let you use state and other React features without writing a class; they were introduced in React 16.8 to simplify component logic and promote reusable, composable behavior  [oai_citation:0‡Wikipedia, la enciclopedia libre](https://es.wikipedia.org/wiki/React?utm_source=chatgpt.com).",
+    "difficulty": 1,
+    "topic": "React"
+  },
+  {
+    "question": "What are the Rules of Hooks in React?",
+    "options": [
+      "Call Hooks only at the top level and from React function components or custom Hooks",
+      "Call Hooks inside loops and conditions to optimize performance",
+      "Call Hooks after rendering completes"
+    ],
+    "correctIndex": 0,
+    "explanation": "Hooks must be called at the top level of a React function component or a custom Hook—never inside loops, conditions, or nested functions—to maintain the correct hook call order across renders  [oai_citation:1‡Wikipedia, la enciclopedia libre](https://es.wikipedia.org/wiki/React?utm_source=chatgpt.com).",
+    "difficulty": 1,
+    "topic": "React"
+  },
+  {
+    "question": "How does the useState Hook work, and how do you use it to manage state in functional components?",
+    "options": [
+      "It returns a stateful value and a function to update it, causing a re-render when called",
+      "It performs side effects after rendering",
+      "It memoizes a computation between renders",
+      "It subscribes to external data sources"
+    ],
+    "correctIndex": 0,
+    "explanation": "useState returns a pair: the current state value and a setter function; invoking the setter schedules an update and re-render with the new state  [oai_citation:2‡Wikipedia, la enciclopedia libre](https://es.wikipedia.org/wiki/React?utm_source=chatgpt.com).",
+    "difficulty": 1,
+    "topic": "React Hooks"
+  },
+  {
+    "question": "How would you type the state and setter returned by useState in a TypeScript React component?",
+    "options": [
+      "TypeScript infers the state type from the initial value, or you can explicitly provide a generic type argument (e.g. useState<boolean>(false))",
+      "You must always annotate both with any",
+      "You cannot use useState in TypeScript",
+      "useState returns an untyped tuple"
+    ],
+    "correctIndex": 0,
+    "explanation": "TypeScript infers the type of the state from the initial value passed to useState; you can also explicitly annotate it via a generic, e.g. useState<number>(0)  [oai_citation:3‡Wikipedia, la enciclopedia libre](https://es.wikipedia.org/wiki/React?utm_source=chatgpt.com).",
+    "difficulty": 2,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "What are the differences between useEffect and useLayoutEffect, and when would you use each?",
+    "options": [
+      "useEffect runs after paint asynchronously; useLayoutEffect runs synchronously after DOM mutations before paint",
+      "useEffect blocks rendering; useLayoutEffect is non-blocking",
+      "useEffect only on mount; useLayoutEffect only on update",
+      "They are identical in behavior"
+    ],
+    "correctIndex": 0,
+    "explanation": "useEffect schedules effects to run after the browser has painted, making it non-blocking; useLayoutEffect runs synchronously after DOM updates but before the browser repaints, useful for DOM measurements to avoid visual flicker  [oai_citation:4‡Kent C. Dodds](https://kentcdodds.com/blog/useeffect-vs-uselayouteffect?utm_source=chatgpt.com) [oai_citation:5‡CodeParrot | Design to Code Copilot](https://codeparrot.ai/blogs/uselayouteffect-vs-useeffect-a-practical-guide-to-react-side-effects?utm_source=chatgpt.com).",
+    "difficulty": 2,
+    "topic": "React Hooks"
+  },
+  {
+    "question": "How does the dependency array of useEffect work, and what can go wrong if it is misused?",
+    "options": [
+      "It lists values to watch and re-run the effect when they change; omitting or mis-specifying dependencies can cause stale values or infinite loops",
+      "It delays the effect until the next render; using an empty array always delays execution",
+      "It controls whether the effect runs before or after paint; a missing array runs it before paint",
+      "It configures the effect to run only once per component instance regardless of changes"
+    ],
+    "correctIndex": 0,
+    "explanation": "The dependency array lists all reactive values (props, state, etc.) read by the effect. React runs the effect after the initial render and whenever any listed dependency changes. Omitting dependencies can cause stale values; incorrect dependencies can cause infinite loops or skipped updates.",
+    "difficulty": 2,
+    "topic": "React Hooks"
+  },
+  {
+    "question": "How do you perform cleanup in a useEffect, and when is the cleanup function called?",
+    "options": [
+      "Return a function from the effect; React calls it before unmounting and before re-running the effect",
+      "Call cleanup manually within the effect callback; React does not auto-clean",
+      "Return a function from the effect; React calls it before unmounting and before re-running the effect",
+      "Pass a second callback to useEffect; React invokes it on unmount only",
+      "Use a separate useCleanup Hook; React calls cleanup after render"
+    ],
+    "correctIndex": 1,
+    "explanation": "To clean up an effect, return a function from its setup. React runs this cleanup function before the component unmounts and before the effect re-runs due to dependency changes. It should stop or undo whatever the setup function started.",
+    "difficulty": 1,
+    "topic": "React Hooks"
+  },
+  {
+    "question": "What is the difference between useMemo and useCallback in React, and when should you use each?",
+    "options": [
+      "useMemo delays effects; useCallback batches state updates",
+      "useMemo only on mount; useCallback only on update",
+      "They are identical aliases for each other",
+      "useMemo memoizes a computed value; useCallback memoizes a function definition"
+    ],
+    "correctIndex": 3,
+    "explanation": "`useMemo` memoizes the result of a function call, recomputing only when dependencies change. `useCallback` memoizes the function definition itself, returning the same function instance unless dependencies change. Use `useMemo` for expensive calculations, `useCallback` for functions passed to optimized children or effect dependencies.",
+    "difficulty": 1,
+    "topic": "React Hooks"
+  },
+  {
+    "question": "Why is it important to wrap functions or values with useCallback or useMemo sometimes?",
+    "options": [
+      "To delay execution until after paint",
+      "To prevent child components from re-rendering unnecessarily when receiving new prop references",
+      "To automatically clean up side effects",
+      "To enforce strict typing in functional components"
+    ],
+    "correctIndex": 1,
+    "explanation": "Referential equality. `useCallback` and `useMemo` provide stable references for functions and values across renders. This is crucial for optimizing performance with `React.memo` or when using dependencies in hooks like `useEffect`, preventing unnecessary re-renders or effect executions.",
+    "difficulty": 1,
+    "topic": "React Hooks"
+  },
+  {
+    "question": "What are the benefits of the useRef Hook, and what are common use cases for it?",
+    "options": [
+      "It forces a component to re-render synchronously",
+      "It schedules effects after layout",
+      "It lets you persist mutable values across renders without causing re-renders, and access DOM elements",
+      "It provides context values to nested components"
+    ],
+    "correctIndex": 2,
+    "explanation": "`useRef` returns a mutable ref object (`{ current: ... }`) that persists across renders without causing them. It's used to access DOM elements directly (e.g., focus management) or to store mutable values that don't need to trigger UI updates (e.g., interval IDs).",
+    "difficulty": 1,
+    "topic": "React Hooks"
+  },
+  {
+    "question": "How do you type a useRef hook in TypeScript for referencing a DOM element or a mutable value?",
+    "options": [
+      "Use createRef<Type>() for both DOM and values",
+      "Use RefObject<Type> without generics",
+      "TypeScript cannot type useRef hooks",
+      "Use useRef<HTMLDivElement>(null) for a DOM element, or useRef<Type>(initialValue) for a value"
+    ],
+    "correctIndex": 3,
+    "explanation": "For DOM elements, use `useRef<ElementType>(null)` (e.g., `useRef<HTMLInputElement>(null)`). For mutable values, use `useRef<ValueType>(initialValue)`. If the initial value might be null, use a union type like `useRef<ValueType | null>(null)`.",
+    "difficulty": 2,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "Explain how the Context API works in React. How do you create, provide, and consume context?",
+    "options": [
+      "Use createStore and connect to wrap components",
+      "Use React.createContext to create, wrap with Context.Provider, and read with useContext or Context.Consumer",
+      "Pass props through every child component explicitly",
+      "Use useState and pass down setter functions"
+    ],
+    "correctIndex": 1,
+    "explanation": "Create context via `React.createContext()`. Provide a value using `<MyContext.Provider value={...}>` higher in the tree. Consume the value in descendants using the `useContext(MyContext)` hook or `<MyContext.Consumer>` component. It avoids prop drilling.",
+    "difficulty": 2,
+    "topic": "React"
+  },
+  {
+    "question": "What are error boundaries in React, and how do you implement one?",
+    "options": [
+      "A try/catch block inside a functional component",
+      "A useErrorBoundary hook in React core",
+      "A component that catches rendering errors in its subtree implemented via a class with componentDidCatch",
+      "A HOC that wraps every component"
+    ],
+    "correctIndex": 2,
+    "explanation": "Error boundaries are class components defining `componentDidCatch(error, info)` or `static getDerivedStateFromError(error)` to catch JS errors in their child tree during rendering, log them, and display a fallback UI instead of crashing.",
+    "difficulty": 2,
+    "topic": "Error Handling"
+  },
+  {
+    "question": "How would you describe prop drilling, and how can you avoid it in a React application?",
+    "options": [
+      "Using inline styles only; avoid CSS files",
+      "Writing deeply nested JSX; avoid fragment usage",
+      "Using multiple HOCs for each prop",
+      "Passing props through many layers; avoid using Context or compound components"
+    ],
+    "correctIndex": 3,
+    "explanation": "Prop drilling is passing props down through multiple intermediate components that don't need the data themselves. Avoid it using React Context, state management libraries (Redux, Zustand), or component composition techniques (passing components as props).",
+    "difficulty": 2,
+    "topic": "React Patterns"
+  },
+  {
+    "question": "How can you implement code splitting and lazy loading in React applications?",
+    "options": [
+      "Import all components up front for faster performance",
+      "Use React.lazy for component imports and wrap with <Suspense fallback>",
+      "Use dynamic require() calls without Suspense",
+      "Use CSS @import to split JavaScript files"
+    ],
+    "correctIndex": 1,
+    "explanation": "Use dynamic `import()` with `React.lazy()` to define components loaded on demand. Wrap the lazy component (or an ancestor) in `<Suspense fallback={...}>` to show a loading indicator while the component's code is fetched.",
+    "difficulty": 2,
+    "topic": "Performance"
+  },
+  {
+    "question": "Describe how React’s event system works, including SyntheticEvents and event delegation.",
+    "options": [
+      "React attaches native event handlers directly to each DOM node",
+      "React uses event delegation, attaching listeners at the root, and normalizes events via SyntheticEvent objects",
+      "All events bypass React and interact directly with the browser's native event system",
+      "SyntheticEvents are only used for custom events created by developers"
+    ],
+    "correctIndex": 1,
+    "explanation": "React uses event delegation, attaching single event listeners to the document root for most events. When an event occurs, React maps it to the component handler and provides a cross-browser `SyntheticEvent` wrapper around the native event object.",
+    "difficulty": 2,
+    "topic": "React"
+  },
+  {
+    "question": "How do you handle events in React (e.g., onClick, onChange)? What is a SyntheticEvent?",
+    "options": [
+      "Attach handlers like <button onclick> and SyntheticEvent is the native event object",
+      "Attach handlers via props (e.g., onClick={handleClick}); SyntheticEvent is React’s cross-browser wrapper",
+      "Use addEventListener in useEffect; SyntheticEvent is for server events",
+      "Use document.querySelector to update DOM"
+    ],
+    "correctIndex": 0,
+    "explanation": "React wraps the browser's native event system with its own SyntheticEvent system. This provides a consistent, cross-browser event object, normalizing differences in browser event implementations.",
+    "difficulty": 1,
+    "topic": "React"
+  },
+  {
+    "question": "How do you add CSS or styling to React components?",
+    "options": [
+      "CSS-in-JS is the only officially supported styling method in React",
+      "React components must use inline styles via the style prop for optimal rendering",
+      "Multiple approaches work including CSS Modules, CSS-in-JS libraries, and traditional CSS",
+      "React requires a special styling syntax called JSS for component styling"
+    ],
+    "correctIndex": 2,
+    "explanation": "React is unopinionated about styling and supports multiple approaches. Traditional CSS files can be imported directly into components. CSS Modules provide local scoping by automatically generating unique class names. CSS-in-JS libraries like styled-components or Emotion allow writing CSS directly in JavaScript with dynamic styling based on props. Inline styles via the style prop work for simple cases but have limitations (no media queries or pseudo-classes). Utility-class frameworks like Tailwind CSS are also popular. Each approach has different trade-offs regarding performance, developer experience, and maintainability.",
+    "difficulty": 1,
+    "topic": "React"
+  },
+  {
+    "question": "How do you test a React component? What libraries or methods are commonly used?",
+    "options": [
+      "Enzyme is the only officially supported testing library for React",
+      "React components should be tested with Jest as the test runner and a library like React Testing Library or Enzyme",
+      "React's built-in TestUtils are sufficient for most testing needs",
+      "Component testing requires Cypress or Playwright for accurate results"
+    ],
+    "correctIndex": 1,
+    "explanation": "React component testing typically involves Jest as the test runner/assertion library combined with a rendering library. React Testing Library (RTL) is now the most popular choice as it encourages testing behavior over implementation details by interacting with components as users would. Enzyme, while still used in many codebases, focuses more on component internals. For component interaction testing, you can use user-event (from RTL) to simulate realistic user interactions. For more comprehensive end-to-end testing, tools like Cypress, Playwright, or Selenium are used. The React team recommends testing approaches that resemble how users interact with components.",
+    "difficulty": 2,
+    "topic": "Testing"
+  },
+  {
+    "question": "How do you test React hooks or components that use hooks?",
+    "options": [
+      "Hooks cannot be tested in isolation and must be tested through components",
+      "Use the @testing-library/react-hooks package with the renderHook utility",
+      "Write a test wrapper component that uses the hook and test that component",
+      "All hooks must be mocked during component testing"
+    ],
+    "correctIndex": 1,
+    "explanation": "React hooks can be tested in isolation using specialized utilities like renderHook. In React 17 and earlier, this was provided by @testing-library/react-hooks, while in React 18+ it's integrated directly into @testing-library/react. The renderHook function creates a test component that calls your hook, allowing you to test the hook's behavior without writing a full component. Alternatively, you can create a simple test component that uses the hook and test that component with standard component testing methods. Both approaches are valid, with the renderHook utility being more concise for complex hooks with multiple states or effects.",
+    "difficulty": 2,
+    "topic": "Testing"
+  },
+  {
+    "question": "What are snapshot tests in React and when are they useful?",
+    "options": [
+      "Tests that verify component performance against previous benchmarks",
+      "A technique for capturing a component's rendered output to detect unexpected UI changes",
+      "Tests that take screenshots of components for visual regression testing",
+      "A method for testing component state transitions over time"
+    ],
+    "correctIndex": 1,
+    "explanation": "Snapshot tests in React capture a component's rendered output (usually as a serialized representation) and compare it against a previously saved 'snapshot' to detect unexpected changes. They're useful for quickly identifying unintended UI changes, especially in stable components where the output should remain consistent. While easy to implement, snapshots have limitations: they can be too sensitive (flagging even minor intentional changes), don't verify behavior or functionality, and can create false confidence. They work best as a complement to other testing approaches, particularly for components with stable UI that rarely changes.",
+    "difficulty": 1,
+    "topic": "Testing"
+  },
+  {
+    "question": "How can you test asynchronous behavior or data fetching in React components?",
+    "options": [
+      "Async operations cannot be reliably tested in React components",
+      "Use the React.Suspense API to test loading states automatically",
+      "Always use real API calls in tests for accurate behavior verification",
+      "Use async utilities like waitFor/findBy and mock network requests"
+    ],
+    "correctIndex": 3,
+    "explanation": "Testing asynchronous behavior in React components requires special utilities to handle timing and state changes. React Testing Library provides async utilities like waitFor, findBy queries, and act that wait for elements to appear or state to update. For API calls, it's best practice to mock network requests rather than making real API calls, which would make tests slow, brittle, and dependent on external services. This can be done using Jest's mock functions, libraries like MSW (Mock Service Worker), or by dependency injection. Good async tests verify loading states, success states, error handling, and proper cleanup of subscriptions or event listeners.",
+    "difficulty": 2,
+    "topic": "Testing"
+  },
+  {
+    "question": "What is state immutability and why is it important in React when updating state?",
+    "options": [
+      "React's diffing algorithm requires immutable updates to work efficiently",
+      "Immutability prevents memory leaks in the virtual DOM",
+      "State must never be modified directly to ensure React can detect changes and trigger re-renders",
+      "Immutability is only required when using Redux with React"
+    ],
+    "correctIndex": 2,
+    "explanation": "State immutability in React means never directly modifying state objects or arrays, but instead creating new copies with the desired changes. This is crucial because React determines when to re-render by doing a shallow comparison (===) between the previous and new state values. If you mutate an object directly, its reference remains the same, so React won't detect the change and won't trigger a re-render. Immutability also enables features like time-travel debugging, predictable state management, and helps avoid subtle bugs from unintended side effects. This principle applies to both useState and useReducer in functional components and setState in class components.",
+    "difficulty": 1,
+    "topic": "React"
+  },
+  {
+    "question": "How do you update nested state or state that is an object/array without mutating it?",
+    "options": [
+      "Use the React.update() method with a path to the nested property",
+      "Create a deep copy using structuredClone() before making changes",
+      "Always replace the entire state object regardless of which property changed",
+      "Use the spread operator for shallow copying and update nested properties with immutable patterns"
+    ],
+    "correctIndex": 3,
+    "explanation": "When updating nested state in React, you need to create a new reference for both the top-level object and any nested objects you're modifying. The most common approach uses the spread operator (...) for shallow copying, combined with targeted updates to nested properties. For example: setState(prev => ({...prev, nested: {...prev.nested, property: newValue}}). For deeply nested structures, this pattern can become verbose, so libraries like Immer provide a more ergonomic solution by letting you write code that appears to mutate while actually producing immutable updates. Other approaches include using utility functions from libraries like lodash/fp or using functional update patterns with useReducer for complex state logic.",
+    "difficulty": 2,
+    "topic": "React"
+  },
+  {
+    "question": "What are common performance optimization techniques in React?",
+    "options": [
+      "Minimize component state and use Context for everything",
+      "Apply strategic memoization, code splitting, and virtualization for large datasets",
+      "Convert all functional components to class components",
+      "Always use keys with array index values for optimal reconciliation"
+    ],
+    "correctIndex": 1,
+    "explanation": "React performance optimization involves several key techniques: 1) Memoization with React.memo, useMemo, and useCallback to prevent unnecessary re-renders and recalculations; 2) Code splitting with React.lazy and Suspense to reduce initial bundle size; 3) Virtualization (windowing) for rendering only visible items in large lists; 4) Using production builds which are significantly faster than development builds; 5) Implementing proper keys for list items (not using array indices); 6) Avoiding excessive re-renders by lifting state appropriately; and 7) Profiling with React DevTools to identify bottlenecks. The right optimization depends on the specific performance issue you're facing.",
+    "difficulty": 2,
+    "topic": "Performance"
+  },
+  {
+    "question": "When should you use React.memo or PureComponent? How do they improve performance?",
+    "options": [
+      "Use them for all components to ensure maximum performance",
+      "Apply them to components that render frequently with the same props",
+      "They're primarily for styling optimization, not rendering performance",
+      "Only use them when working with Context to prevent provider updates"
+    ],
+    "correctIndex": 1,
+    "explanation": "React.memo (for function components) and PureComponent (for class components) implement shallow prop comparison to prevent unnecessary re-renders when props haven't changed. They're most beneficial for components that render often with the same props, especially expensive rendering operations or components deep in the tree that receive stable props. However, they should NOT be applied indiscriminately to every component, as the comparison itself has a cost and can be counterproductive for simple components or those with frequently changing props. They're also ineffective with object/array props that are recreated on each render unless combined with useMemo/useCallback.",
+    "difficulty": 1,
+    "topic": "Performance"
+  },
+  {
+    "question": "What is reconciliation in React and how does it affect performance (including the use of keys)?",
+    "options": [
+      "The algorithm that determines which components need to be re-rendered when state changes",
+      "A technique for merging multiple state updates into a single render cycle",
+      "The process of synchronizing browser events with React's synthetic event system",
+      "A server-side rendering optimization that pre-computes component trees"
+    ],
+    "correctIndex": 0,
+    "explanation": "Reconciliation is React's algorithm for comparing two Virtual DOM trees to determine which parts need to be updated in the actual DOM. When state or props change, React creates a new Virtual DOM tree and compares it with the previous one. For efficiency, React uses heuristics: 1) Different element types will produce different trees; 2) Elements with stable keys will be matched across renders. Keys are crucial for lists, as they help React identify which items have changed, been added, or removed. Without keys (or with index-based keys in reordered lists), React may unnecessarily recreate DOM nodes, causing performance issues and potential state loss in components.",
+    "difficulty": 2,
+    "topic": "React Internals"
+  },
+  {
+    "question": "Describe how the React Virtual DOM works and how React uses it to update the actual DOM.",
+    "options": [
+      "React renders directly to the file system",
+      "React uses a shadow DOM like Web Components",
+      "React builds an in-memory tree, diffs it with the previous, and applies minimal changes to the real DOM",
+      "React serializes components to JSON only"
+    ],
+    "correctIndex": 2,
+    "explanation": "The Virtual DOM is a lightweight copy of the actual DOM kept in memory. When state changes, React creates a new Virtual DOM tree and compares it with the previous one through a process called reconciliation. It then calculates the minimal set of operations needed to update the real DOM, reducing expensive DOM manipulations.",
+    "difficulty": 2,
+    "topic": "Performance"
+  },
+  {
+    "question": "How do you implement conditional rendering in React components?",
+    "options": [
+      "Use the React.Conditional wrapper component with a condition prop",
+      "Apply inline JavaScript expressions and operators within JSX",
+      "Create separate component files for each possible rendering condition",
+      "Use CSS display properties exclusively to show and hide elements"
+    ],
+    "correctIndex": 1,
+    "explanation": "Conditional rendering in React is implemented using standard JavaScript logic within JSX. Common patterns include: 1) Using ternary operators for if-else logic (condition ? <ComponentA /> : <ComponentB />); 2) Using logical AND (&&) for if-only conditions (condition && <Component />); 3) Using variables to store elements based on conditions; 4) Creating helper methods that return different JSX based on component state; and 5) Using early returns in the component body for guard clauses. Unlike some frameworks, React doesn't have special directives for conditionals—it leverages JavaScript's built-in control flow. This approach keeps React's API small and allows developers to use familiar JavaScript patterns.",
+    "difficulty": 1,
+    "topic": "React"
+  },
+  {
+    "question": "How would you pass data from a child component back to a parent component?",
+    "options": [
+      "Use the built-in React.sendToParent() method",
+      "Directly modify the parent component's state using refs",
+      "Pass a function from parent to child that the child can call with data",
+      "Create a shared Redux store even for simple parent-child communication"
+    ],
+    "correctIndex": 2,
+    "explanation": "In React's unidirectional data flow, parents pass data down to children via props, but children communicate back to parents through callback functions. The parent defines a function that can update its state and passes this function as a prop to the child. When the child needs to send data up, it calls this function with the data as an argument. This pattern maintains the principle that a component should only modify its own state. While Context or state management libraries can also facilitate communication between components, they're typically overkill for simple parent-child interactions and are better suited for distant components or complex state sharing.",
+    "difficulty": 1,
+    "topic": "React"
+  },
+  {
+    "question": "What are default props in React and how are they handled differently in functional vs class components?",
+    "options": [
+      "Default props are only available in class components using the static property",
+      "Both component types use the defaultProps static property in the same way",
+      "Functional components typically use ES6 parameter defaults while class components use static defaultProps",
+      "React automatically provides default values for all component props"
+    ],
+    "correctIndex": 2,
+    "explanation": "In functional components, default props are typically handled using JavaScript's default parameter syntax (e.g., function Button({ color = 'blue' })). In class components, default props are set using the static defaultProps property (e.g., Button.defaultProps = { color: 'blue' }). With TypeScript, default parameters are generally preferred for functional components as they integrate better with type checking.",
+    "difficulty": 2,
+    "topic": "React"
+  },
+  {
+    "question": "How do you handle side effects like data fetching or subscriptions in React components?",
+    "options": [
+      "Directly in JSX",
+      "Use the useEffect Hook with cleanup for subscriptions",
+      "Use setTimeout in render",
+      "Use componentWillMount lifecycle method"
+    ],
+    "correctIndex": 1,
+    "explanation": "Side effects in React components should be handled with the useEffect Hook. This hook runs after render and is perfect for data fetching, subscriptions, or manual DOM manipulations. For subscriptions or event listeners, return a cleanup function from useEffect to prevent memory leaks. The dependency array controls when the effect runs—an empty array ([]) means it only runs once after initial render, while specific dependencies trigger the effect when those values change.",
+    "difficulty": 1,
+    "topic": "React Hooks"
+  },
+  {
+    "question": "Explain the concept of controlled vs uncontrolled components for form inputs in React.",
+    "options": [
+      "Controlled components use refs; uncontrolled use state",
+      "Controlled components are always class components",
+      "Controlled components have their value driven by React state via props/onChange; uncontrolled use refs and DOM state",
+      "Uncontrolled components cannot be used in forms"
+    ],
+    "correctIndex": 2,
+    "explanation": "In controlled components, form data is handled by React state. The input's value is set by state and changes are handled through onChange events that update state. In uncontrolled components, form data is handled by the DOM itself, with React using refs to access values when needed (e.g., on form submission).",
+    "difficulty": 2,
+    "topic": "React"
+  },
+  {
+    "question": "How can you implement internationalization (i18n) or localization in a React app?",
+    "options": [
+      "Use CSS for translations",
+      "Use libraries like react-i18next or react-intl with context providers",
+      "Hard-code strings in multiple languages",
+      "Use the browser's locale API only"
+    ],
+    "correctIndex": 1,
+    "explanation": "Internationalization in React is best implemented using specialized libraries like react-i18next or react-intl. These libraries provide context providers to make translations available throughout the component tree, translation functions for handling plurals and interpolation, and utilities for formatting dates, numbers, and currencies according to locale. They typically work with JSON or PO files containing translations for different languages and support dynamic language switching without page reloads.",
+    "difficulty": 2,
+    "topic": "React"
+  },
+  {
+    "question": "How do you prevent unnecessary re-renders in React components?",
+    "options": [
+      "Always use class components",
+      "Use inline arrow functions in JSX",
+      "Ensure props/state are stable, use React.memo, and avoid creating new functions/objects in props each render",
+      "Avoid useEffect hooks"
+    ],
+    "correctIndex": 2,
+    "explanation": "React.memo prevents component re-renders unless props change. useMemo and useCallback maintain referential equality for values and functions between renders. Keeping state local to components that need it and lifting state only when necessary also reduces cascading re-renders. Creating objects or functions inside render creates new references each time, triggering re-renders in memoized children.",
+    "difficulty": 2,
+    "topic": "Performance"
+  },
+  {
+    "question": "What is the difference between React.Fragment and using a <div> to wrap elements?",
+    "options": [
+      "Fragment only works in class components",
+      "div cannot wrap multiple children",
+      "Fragment groups children without adding an extra DOM node; div adds an element",
+      "There is no difference"
+    ],
+    "correctIndex": 2,
+    "explanation": "React.Fragment (or the shorthand <></>) lets you group multiple elements without adding an extra node to the DOM. Using a <div> adds an actual DOM element, which can break layouts, CSS selectors, or semantics. Fragments are especially useful in tables, lists, or flex/grid layouts where extra wrapper elements would cause styling issues.",
+    "difficulty": 1,
+    "topic": "React"
+  },
+  {
+    "question": "How do you capture keyboard or mouse events in React?",
+    "options": [
+      "Use document.querySelector in render",
+      "Use inline HTML attributes only",
+      "Add event handlers like onKeyDown or onMouseMove to elements or document in useEffect",
+      "Use addEventListener outside React"
+    ],
+    "correctIndex": 2,
+    "explanation": "React provides synthetic event handlers like onKeyDown, onKeyPress, onMouseMove, and onClick that work across browsers. For document/window events, add event listeners in useEffect with proper cleanup. For example: useEffect(() => { const handleKeyDown = (e) => {...}; window.addEventListener('keydown', handleKeyDown); return () => window.removeEventListener('keydown', handleKeyDown); }, []);",
+    "difficulty": 1,
+    "topic": "React"
+  },
+  {
+    "question": "What is the significance of the key prop in lists and how does React use it internally?",
+    "options": [
+      "Keys set CSS class names",
+      "Keys are used for indexing arrays",
+      "Keys control event delegation",
+      "Keys help React identify items between renders to add, move, or remove elements efficiently"
+    ],
+    "correctIndex": 3,
+    "explanation": "During reconciliation, React uses keys to match elements in the previous and new render. Without keys, React relies solely on element order, requiring it to rebuild the entire list when items change position. With unique keys, React can identify which specific items changed, were added, or removed, allowing it to preserve state and avoid unnecessary DOM operations.",
+    "difficulty": 1,
+    "topic": "Performance"
+  },
+  {
+    "question": "How do you focus an input element programmatically in React?",
+    "options": [
+      "Use CSS :focus selector",
+      "Use document.getElementById only",
+      "Use useRef to get the DOM node and call .focus() in an effect or event handler",
+      "Use onClick handler on body"
+    ],
+    "correctIndex": 2,
+    "explanation": "To focus an input programmatically in React: 1) Create a ref with useRef(), 2) Attach it to the input element with the ref attribute (<input ref={myRef} />), 3) Call the DOM focus() method on the ref's current property (myRef.current.focus()). This can be done in event handlers, effects, or imperative handle functions.",
+    "difficulty": 1,
+    "topic": "React"
+  },
+  {
+    "question": "How do you implement a debounce or throttle in a React component (e.g., for a search input)?",
+    "options": [
+      "Use useLayoutEffect only",
+      "Use utilities like lodash.debounce or implement setTimeout/clearTimeout in useEffect",
+      "Use CSS animations",
+      "Use useRef exclusively"
+    ],
+    "correctIndex": 1,
+    "explanation": "Debouncing delays execution until after a period of inactivity, while throttling limits execution to a maximum frequency. In React, you can implement these patterns by: 1) Using utility libraries like lodash.debounce/throttle, 2) Creating a custom implementation with setTimeout/clearTimeout inside useEffect with proper cleanup, or 3) Creating a custom hook that manages the timing logic and returns a memoized callback.",
+    "difficulty": 2,
+    "topic": "Performance"
+  },
+  {
+    "question": "What is lazy initialization of state in React (provide an example with useState)?",
+    "options": [
+      "Initialize state after first render manually",
+      "Pass a function to useState for expensive initial state: useState(() => expensiveComputation())",
+      "Define state outside the component",
+      "Use useRef to store initial state"
+    ],
+    "correctIndex": 1,
+    "explanation": "Lazy initialization passes a function to useState instead of a direct value. React calls this function only during the first render and ignores it on subsequent renders. This is useful for expensive computations (like parsing localStorage or complex calculations) that shouldn't run on every render. Example: useState(() => JSON.parse(localStorage.getItem('data')) || defaultValue).",
+    "difficulty": 2,
+    "topic": "React Hooks"
+  },
+  {
+    "question": "How do you perform side effects at specific stages of a component's lifecycle in a functional component?",
+    "options": [
+      "Use setTimeout in render",
+      "Use multiple render calls",
+      "Use class component lifecycle methods only",
+      "Use useEffect with appropriate dependency array to emulate mount, update, and unmount cleanup"
+    ],
+    "correctIndex": 3,
+    "explanation": "In functional components, useEffect replaces lifecycle methods. For componentDidMount: useEffect(() => {...}, []). For componentDidUpdate: useEffect(() => {...}, [dependency]). For componentWillUnmount: useEffect(() => { return () => {...} }, []). The cleanup function runs before the component unmounts and before the effect runs again if dependencies change.",
+    "difficulty": 2,
+    "topic": "React Hooks"
+  },
+  {
+    "question": "How would you memoize a value that depends on props or state to avoid expensive re-calculations?",
+    "options": [
+      "Use useCallback instead",
+      "Use CSS variables",
+      "Use useMemo(() => computeValue(props), [props])",
+      "Use render props"
+    ],
+    "correctIndex": 2,
+    "explanation": "useMemo caches the result of a calculation between re-renders until its dependencies change. It takes a calculation function and a dependency array, recalculating only when a dependency changes. This prevents expensive calculations (like filtering arrays, complex math, or formatting large data) from running on every render, improving performance for computations that would otherwise be repeated unnecessarily.",
+    "difficulty": 2,
+    "topic": "Performance"
+  },
+  {
+    "question": "How do you use the useReducer Hook, and when is it preferable to useState?",
+    "options": [
+      "useReducer is for side effects",
+      "useReducer only in class components",
+      "useReducer manages complex state logic via a reducer function; use it when next state depends on previous state or for multiple related state values",
+      "useReducer replaces useEffect"
+    ],
+    "correctIndex": 2,
+    "explanation": "useReducer takes a reducer function (state, action) => newState and an initial state, returning the current state and a dispatch function. It's preferable to useState when: 1) state logic is complex with multiple sub-values, 2) next state depends on previous state, 3) state transitions follow specific patterns, or 4) you need to centralize state logic outside component body. Example: const [state, dispatch] = useReducer(reducer, initialState).",
+    "difficulty": 2,
+    "topic": "React Hooks"
+  },
+  {
+    "question": "In TypeScript, how do you type a functional component with props?",
+    "options": [
+      "Use any for the props argument",
+      "Define an interface/type for props and annotate the component parameters, e.g. function MyComponent({ title }: Props) {}",
+      "TypeScript does not support optional props",
+      "Use optionalProps() helper"
+    ],
+    "correctIndex": 1,
+    "explanation": "In TypeScript React, you can type functional components by: 1) Creating an interface/type for props (interface Props { title: string; optional?: boolean; }), 2) Using the interface as a type annotation for the component's parameters (function MyComponent({ title, optional }: Props)), or 3) Using React.FC generic type (const MyComponent: React.FC<Props> = ({ title, optional }) => ...). Optional props are supported using the ? operator in the interface.",
+    "difficulty": 1,
+    "topic": "Foundational"
+  },
+  {
+    "question": "Should you use React.FC for typing React components in TypeScript? What are the pros and cons?",
+    "options": [
+      "React.FC adds implicit children typing and defaultProps support but can be less flexible with generics; it’s optional",
+      "React.FC is required for all TSX files",
+      "React.FC prevents using hooks",
+      "React.FC enforces class components"
+    ],
+    "correctIndex": 0,
+    "explanation": "React.FC is optional and has evolved over time. Pros: It provides implicit typing for children props, offers better IDE autocomplete, and explicitly indicates a component is a function component. Cons: It had issues with defaultProps in older versions, can be more verbose, and may be less flexible with complex generic types. Many teams now prefer regular function declarations with explicit return types for more control.",
+    "difficulty": 2,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "What is the compound component pattern in React, and why is it useful?",
+    "options": [
+      "A method for combining multiple reducers",
+      "A CSS-in-JS pattern for styling compound selectors",
+      "A pattern where multiple related components share implicit state via a common parent and Context",
+      "A single component that handles both logic and presentation"
+    ],
+    "correctIndex": 2,
+    "explanation": "The compound component pattern creates a set of components that work together to handle a complete feature. A parent component manages shared state and behavior, while child components (often exposed as static properties) handle specific parts of the UI. This pattern improves component composition, encapsulates related logic, and creates more intuitive APIs compared to complex prop objects.",
+    "difficulty": 2,
+    "topic": "React Patterns"
+  },
+  {
+    "question": "What is prop drilling in React, and how can it be mitigated?",
+    "options": [
+      "Using hooks inside loops; mitigate by memoizing hooks",
+      "Drilling holes in JSX markup; mitigate by using Fragments",
+      "Passing props through many intermediate components; mitigate by using Context API or state management",
+      "Rendering props conditionally; mitigate by always rendering all props"
+    ],
+    "correctIndex": 2,
+    "explanation": "Prop drilling occurs when props need to be passed through multiple layers of nested components that don't actually use those props but merely pass them down. This creates maintenance issues, reduced code readability, and tight component coupling. Common solutions include using React's Context API, custom hooks that leverage Context, or state management libraries like Redux, Zustand, or MobX.",
+    "difficulty": 1,
+    "topic": "React Patterns"
+  },
+  {
+    "question": "Explain the concept of lifting state up in a React application.",
+    "options": [
+      "Using Context API instead of props",
+      "Moving shared state to the nearest common ancestor so multiple children access it via props",
+      "Using useReducer instead of useState",
+      "Combining multiple state variables into a single object"
+    ],
+    "correctIndex": 1,
+    "explanation": "Lifting state up is a React pattern where state that needs to be shared between sibling components is moved to their closest common parent component. The parent then passes this state and state updater functions down as props to the children. This creates a single source of truth for the shared data and ensures that when the state changes, all components using that state re-render with the updated values.",
+    "difficulty": 1,
+    "topic": "React Patterns"
+  },
+  {
+    "question": "What is the dependency inversion principle, and how might it apply to a React app architecture?",
+    "options": [
+      "Use inverted color themes via CSS",
+      "Invert component tree when rendering",
+      "Depend on abstractions, not concretions; inject services or callbacks via props or Context",
+      "Swap state management libraries dynamically"
+    ],
+    "correctIndex": 2,
+    "explanation": "The Dependency Inversion Principle (DIP) states that high-level modules should not depend on low-level modules; both should depend on abstractions. In React, this means components should depend on interfaces rather than specific implementations. For example, instead of directly importing and using an API service, a component could receive data fetching functions via props or Context, making it more reusable and easier to test with mock implementations.",
+    "difficulty": 2,
+    "topic": "Architecture"
+  },
+  {
+    "question": "What are Higher-Order Components (HOCs) and how do they help in code reuse?",
+    "options": [
+      "A pattern of nested JSX elements",
+      "Functions that take a component and return a new component with added props or behavior",
+      "A replacement for Context API",
+      "Components that render multiple children using higher-order loops"
+    ],
+    "correctIndex": 1,
+    "explanation": "Higher-Order Components (HOCs) are functions that take a component and return a new enhanced component with additional props, state, or behavior. They follow the principle of composition over inheritance for reusing component logic. Common use cases include adding authentication checks, data fetching, logging, or styling to multiple components without duplicating code. HOCs have largely been supplemented by Hooks in modern React, but they remain important in many codebases and libraries like Redux's connect().",
+    "difficulty": 2,
+    "topic": "React Patterns"
+  },
+  {
+    "question": "What are render props in React, and how do they differ from HOCs?",
+    "options": [
+      "A hook for rendering components",
+      "A replacement for useEffect",
+      "A function prop that a component calls to render UI; more flexible than HOCs",
+      "A way to pass CSS classes as props"
+    ],
+    "correctIndex": 2,
+    "explanation": "Render props is a pattern where a component receives a function prop that returns JSX, allowing the component to call this function to render part of its output. Unlike HOCs which wrap components, render props invert control by letting the parent determine what gets rendered with data managed by the child. This pattern provides more transparency in how props are used, avoids naming collisions common in HOCs, and makes composition more explicit. The children prop can also be used as a render prop.",
+    "difficulty": 2,
+    "topic": "React Patterns"
+  },
+  {
+    "question": "Explain the container vs presentational component pattern in React architecture.",
+    "options": [
+      "They are identical patterns",
+      "Container components use hooks; presentational use classes",
+      "Presentational components focus on UI and receive data via props; container components handle data fetching and state",
+      "Containers manage CSS; presentational manage HTML"
+    ],
+    "correctIndex": 2,
+    "explanation": "The container/presentational pattern separates concerns in React components. Presentational components are focused on how things look—they receive data via props, render UI elements, and are typically pure functions with little to no state (except UI state). Container components focus on how things work—they manage data fetching, state, and business logic, then pass data down to presentational components. This separation improves reusability, testability, and maintainability, though with the introduction of Hooks, the distinction has become less rigid in modern React.",
+    "difficulty": 2,
+    "topic": "Architecture"
+  },
+  {
+    "question": "In React, why is composition preferred over inheritance?",
+    "options": [
+      "Because inheritance is deprecated in JavaScript",
+      "Because composing components via props and children is more flexible and aligns with React's design",
+      "Because composition uses less memory",
+      "Because inheritance only works in class components"
+    ],
+    "correctIndex": 1,
+    "explanation": "React recommends composition over inheritance because it provides more flexibility. Instead of creating complex inheritance hierarchies, React encourages building components that use props and children to customize behavior. This approach makes it easier to reuse code between components, keeps components focused on specific tasks, and allows for clearer component relationships. Common composition patterns include containment (using children props) and specialization (configuring generic components with specific props).",
+    "difficulty": 1,
+    "topic": "Architecture"
+  },
+  {
+    "question": "How does using the Context API affect React app architecture?",
+    "options": [
+      "It only works in class components",
+      "It allows you to provide values globally, reducing prop drilling and decoupling consumers",
+      "It replaces useState for all state management",
+      "It forces all components to re-render on every state change"
+    ],
+    "correctIndex": 1,
+    "explanation": "Context API enables a more centralized state management approach in React applications by providing a way to share values across the component tree without explicitly passing props. This reduces prop drilling and creates a cleaner component API. However, it introduces architectural considerations: Context should be used judiciously (primarily for truly global state), consumers re-render when context values change, and overuse can make data flow harder to track. Context works well for theme, authentication, localization, and other app-wide settings.",
+    "difficulty": 2,
+    "topic": "Architecture"
+  },
+  {
+    "question": "What is virtualization (windowing) in the context of React, and when would you use it?",
+    "options": [
+      "A pattern of virtual DOM diffing",
+      "Loading images on demand",
+      "Rendering only visible items in a large list for performance, using libraries like react-window",
+      "Using CSS to hide offscreen elements"
+    ],
+    "correctIndex": 2,
+    "explanation": "Virtualization (or windowing) is a technique that renders only the items currently visible in the viewport, rather than rendering an entire large list at once. This significantly improves performance by reducing DOM nodes, memory usage, and rendering time. Libraries like react-window and react-virtualized provide components to implement this pattern. You should use virtualization when rendering large lists or grids (hundreds or thousands of items) where only a small portion is visible at any time, such as infinite scrolling feeds, data tables, or long dropdown menus.",
+    "difficulty": 2,
+    "topic": "Performance"
+  },
+  {
+    "question": "What is code splitting (lazy loading) in a React application and why is it beneficial?",
+    "options": [
+      "Splitting CSS files only",
+      "Loading parts of the code on demand (e.g., per route) to reduce initial bundle size and improve load time",
+      "Combining all code into one file",
+      "A test pattern for splitting components"
+    ],
+    "correctIndex": 1,
+    "explanation": "Code splitting is a technique that breaks your bundle into smaller chunks that load on demand rather than loading the entire application code upfront. In React, this is implemented using dynamic imports with React.lazy() and Suspense. The main benefits include faster initial page load (improving user experience and SEO), reduced memory usage (only loading what's needed), and more efficient caching (smaller chunks can be updated independently). Common splitting points include routes, large components, modals, or any feature not immediately needed on page load.",
+    "difficulty": 2,
+    "topic": "Performance"
+  },
+  {
+    "question": "How do you manage dependencies and shared logic across multiple components?",
+    "options": [
+      "Use global variables only",
+      "Copy-paste code between components",
+      "Extract common logic into custom Hooks or HOCs for reuse",
+      "Use inline functions in JSX"
+    ],
+    "correctIndex": 2,
+    "explanation": "In React, the best practice for sharing logic across components is to extract common functionality into reusable units. Custom Hooks are the modern approach, allowing stateful logic to be extracted and reused between components without changing the component hierarchy. Higher-Order Components (HOCs) wrap components to add functionality. Utility functions can handle pure logic that doesn't involve React features. Context API helps manage shared state and dependencies. These approaches promote the DRY principle, improve maintainability, and make testing easier.",
+    "difficulty": 2,
+    "topic": "React Patterns"
+  },
+  {
+    "question": "What is the single responsibility principle for React components?",
+    "options": [
+      "Components must be less than 50 lines",
+      "Each component should have one clear purpose—either UI rendering or a specific piece of logic",
+      "Each component must have only one prop",
+      "Components cannot import other modules"
+    ],
+    "correctIndex": 1,
+    "explanation": "The single responsibility principle applied to React components means each component should do one thing well and have a single reason to change. This creates more maintainable, testable, and reusable components. In practice, this often means separating concerns like data fetching from presentation, breaking large components into smaller focused ones, and extracting complex logic into custom hooks. This principle doesn't strictly limit code size but encourages logical separation of responsibilities.",
+    "difficulty": 2,
+    "topic": "Architecture"
+  },
+  {
+    "question": "How might you design a theme or localization feature in React?",
+    "options": [
+      "Hardcode strings in each component",
+      "Use window.alert for each locale change",
+      "Provide theme or locale data via Context so components consume it without prop drilling",
+      "Use CSS variables only"
+    ],
+    "correctIndex": 2,
+    "explanation": "For themes and localization in React, Context API is the ideal solution as these are app-wide settings that many components need access to. A typical implementation involves creating a ThemeContext or LocaleContext that provides the current theme/locale and functions to change them. Components can then consume this context to access translated strings or themed styles without prop drilling. For localization specifically, libraries like react-i18next or react-intl handle pluralization, date/number formatting, and RTL languages. For theming, you might combine Context with CSS variables, styled-components, or CSS modules.",
+    "difficulty": 2,
+    "topic": "React Patterns"
+  },
+  {
+    "question": "What is the difference between global state and local state in a React architecture?",
+    "options": [
+      "No difference",
+      "Local state uses useState; global uses useEffect",
+      "Local state lives in individual components; global state (via Context or stores) is shared across multiple parts of the app",
+      "Global state is stored in variables; local state in closures"
+    ],
+    "correctIndex": 2,
+    "explanation": "Local state is component-specific data managed within a single component (typically with useState or useReducer) and is only accessible to that component and its children via props. Global state is application-wide data that multiple components across different parts of the component tree need to access or modify. Global state is typically implemented using Context API, Redux, Zustand, or other state management libraries. The decision between local and global state depends on the scope of data usage—use local state for component-specific concerns and global state for widely shared data like user authentication, themes, or application settings.",
+    "difficulty": 1,
+    "topic": "Architecture"
+  },
+  {
+    "question": "What are the architectural trade-offs of using React Context for state management?",
+    "options": [
+      "Context only works with class components",
+      "Context simplifies passing state but can cause unnecessary re-renders if values change frequently",
+      "Context cannot pass functions",
+      "Context replaces Redux in all cases"
+    ],
+    "correctIndex": 1,
+    "explanation": "React Context provides a simple built-in solution for sharing state across components, but comes with trade-offs. While it eliminates prop drilling and keeps component APIs clean, it can cause performance issues when context values change frequently, as all consuming components re-render. Context also lacks middleware, time-travel debugging, and other advanced features of dedicated state management libraries. It works best for relatively static values (themes, user data, localization) rather than frequently changing application state. For complex state with many updates, libraries like Redux, Zustand, or Jotai may be more appropriate.",
+    "difficulty": 2,
+    "topic": "Architecture"
+  },
+  {
+    "question": "What is the observer pattern or subscription model in React?",
+    "options": [
+      "Components render on every setTimeout",
+      "Components poll for data in useEffect",
+      "Components subscribe to data sources (like Context or stores) and update when that data changes",
+      "Components observe DOM mutations only"
+    ],
+    "correctIndex": 2,
+    "explanation": "The observer pattern in React involves components subscribing to data sources and automatically re-rendering when those sources change. React implements this pattern in several ways: Context API (components consuming context re-render when context values change), state management libraries like Redux (components connected to the store update when relevant state changes), and hooks like useEffect for subscribing to external data sources. This pattern creates a reactive UI that responds to data changes without manual intervention, improving developer experience by abstracting away the mechanics of keeping the UI in sync with data.",
+    "difficulty": 2,
+    "topic": "Architecture"
+  },
+  {
+    "question": "What is React Fiber and how does it improve React's architecture?",
+    "options": [
+      "React Fiber is a complete rewrite of React's core algorithm that introduces priority-based rendering and improves animation smoothness",
+      "A WebGL rendering backend that replaces the DOM for better graphics performance",
+      "A state management pattern that replaces Redux with built-in time-slicing",
+      "The internal reconciliation algorithm redesign that enables incremental rendering and better scheduling"
+    ],
+    "correctIndex": 3,
+    "explanation": "React Fiber is a reimplementation of React's core reconciliation algorithm introduced in React 16. It enables incremental rendering by breaking rendering work into chunks ('fibers') that can be paused, aborted, or resumed based on priority. This architecture allows React to implement features like Suspense, concurrent rendering, and better handling of high-priority updates (like animations and user input) while deferring less critical work. Fiber is not a public API but the internal engine that powers modern React features.",
+    "difficulty": 3,
+    "topic": "Internals"
+  },
+  {
+    "question": "Explain how React's reconciliation algorithm works and why it relies on the key prop.",
+    "options": [
+      "It uses a hash map to track DOM elements, with keys determining which elements get re-rendered",
+      "It performs a complete tree traversal during each render cycle and keys are just optimization hints",
+      "It compares elements in order and only needs keys for collections to establish identity across renders",
+      "It applies a breadth-first search to identify different nodes and keys provide unique IDs for the algorithm"
+    ],
+    "correctIndex": 2,
+    "explanation": "React's reconciliation algorithm compares the previous render tree with the new one to determine the minimal set of changes needed. It first compares element types - if they differ, it rebuilds the entire subtree. If types match, it updates props on the existing DOM node. For lists of elements, React compares items in order by default, which is inefficient for reordering. The key prop provides stable identities for elements across renders, allowing React to identify which items were added, removed, or moved, rather than rebuilding the entire list. This significantly improves performance for dynamic lists.",
+    "difficulty": 3,
+    "topic": "Internals"
+  },
+  {
+    "question": "What is the Virtual DOM in React, and how does React use it to optimize updates?",
+    "options": [
+      "A lightweight React-specific markup language that compiles to HTML",
+      "A JavaScript representation of the DOM used for fast diffing and batching multiple updates",
+      "A server-side rendering technology that pre-renders components",
+      "A web worker implementation that handles DOM updates in a separate thread"
+    ],
+    "correctIndex": 1,
+    "explanation": "The Virtual DOM is a lightweight JavaScript object representation of the actual DOM tree kept in memory. When state changes, React creates a new Virtual DOM tree and compares it with the previous one through a process called reconciliation. It then identifies the minimal set of operations needed to update the real DOM and batches them together, reducing expensive DOM manipulations. This approach allows React to optimize updates by only touching DOM elements that actually changed, rather than re-rendering everything, leading to significant performance improvements.",
+    "difficulty": 2,
+    "topic": "Internals"
+  },
+  {
+    "question": "What is batching in React (especially in React 18)?",
+    "options": [
+      "A process that combines multiple component renders into a single cycle",
+      "The system for prioritizing UI updates based on user interaction",
+      "An optimization that merges simultaneous network requests",
+      "The automatic consolidation of multiple state updates into a single render pass"
+    ],
+    "correctIndex": 3,
+    "explanation": "Batching in React consolidates multiple state updates into a single re-render, improving performance by avoiding unnecessary render cycles. In React 17 and earlier, batching only happened during event handlers, while updates from promises, setTimeout, native event handlers, etc. were not batched. React 18 introduces 'automatic batching' which ensures all state updates are batched regardless of where they occur, as long as they're in the same event loop tick. This reduces the number of renders while maintaining the same behavior, resulting in better performance with minimal code changes.",
+    "difficulty": 2,
+    "topic": "Internals"
+  },
+  {
+    "question": "What is JSX in React, and how is it transformed under the hood?",
+    "options": [
+      "A templating language that compiles directly to HTML string literals",
+      "An XML-like syntax extension transformed into JavaScript function calls",
+      "A special markdown syntax interpreted by React's runtime parser",
+      "A hybrid language that combines JavaScript with HTML's native syntax"
+    ],
+    "correctIndex": 1,
+    "explanation": "JSX is a syntax extension for JavaScript that resembles HTML but gets transformed into JavaScript before execution. In classic React (pre-v17), JSX is compiled into React.createElement() function calls by tools like Babel or TypeScript. For example, <div className='hello'>Hello</div> becomes React.createElement('div', { className: 'hello' }, 'Hello'). In React 17+, with the new JSX transform, it's converted to _jsx('div', { className: 'hello', children: 'Hello' }), eliminating the need to import React just for JSX. These function calls create plain JavaScript objects (React elements) describing what should appear on screen.",
+    "difficulty": 1,
+    "topic": "Foundational"
+  },
+  {
+    "question": "What is a React functional component versus a class component?",
+    "options": [
+      "Functional components are limited to presentation, while class components handle state",
+      "Class components provide better performance for complex UI rendering",
+      "Functional components are plain JavaScript functions that return React elements, while class components use ES6 classes",
+      "Class components are recommended for new code, while functional components are legacy"
+    ],
+    "correctIndex": 2,
+    "explanation": "Functional components are JavaScript functions that accept props and return React elements. Class components are ES6 classes extending React.Component that have a render method returning React elements. Historically, only class components could use state and lifecycle methods, but hooks (introduced in React 16.8) brought these capabilities to functional components. While both component types are still supported, the React team now recommends functional components with hooks for most use cases due to their simplicity, reduced boilerplate, better optimization potential, and easier handling of side effects.",
+    "difficulty": 1,
+    "topic": "Foundational"
+  },
+  {
+    "question": "How do you define and use state in a React component?",
+    "options": [
+      "Use the state property in both class and functional components",
+      "Functional components use setState(); class components use this.state",
+      "Store state in refs for better persistence across renders",
+      "Class components use this.state and this.setState(); functional components use the useState hook"
+    ],
+    "correctIndex": 3,
+    "explanation": "In React, state management varies by component type. Class components define initial state in the constructor with `this.state = {...}` and update it using `this.setState()`, which merges the update with existing state. Functional components use the `useState` hook that returns a state value and a setter function: `const [count, setCount] = useState(0)`. Unlike `this.setState`, the setter from useState replaces (not merges) the previous state value. Both approaches trigger re-renders when state changes, and both maintain state between renders.",
+    "difficulty": 1,
+    "topic": "Foundational"
+  },
+  {
+    "question": "How do you denote optional props in TypeScript?",
+    "options": [
+      "Use the Optional<T> utility type to wrap properties",
+      "Add @optional decorator to class properties",
+      "Apply the | undefined union type to make properties optional",
+      "Use a question mark after the property name in the type definition"
+    ],
+    "correctIndex": 3,
+    "explanation": "In TypeScript, optional props are denoted by adding a question mark after the property name in an interface or type definition. For example: `interface ButtonProps { color?: string; }` makes the color prop optional. This is equivalent to `{ color: string | undefined }` but with the additional benefit that you don't need to explicitly pass undefined. When using optional props, you should add defensive checks (like the optional chaining operator `?.`) or provide default values to handle cases when the prop isn't provided.",
+    "difficulty": 1,
+    "topic": "Foundational"
+  },
+  {
+    "question": "When should you use React Context over passing props directly?",
+    "options": [
+      "For any data shared between two or more components",
+      "When data needs to be accessed by multiple components across different parts of the component tree",
+      "Only for theme data and UI preferences",
+      "When you need high-performance state updates across the application"
+    ],
+    "correctIndex": 1,
+    "explanation": "React Context should be used when data needs to be accessed by many components at different nesting levels without passing props through all the intermediary components (prop drilling). It's most suitable for relatively static, global data like authentication status, themes, language settings, or user preferences. Context is not optimized for high-frequency updates as it causes all consuming components to re-render. For component-specific state or data only shared between a few closely related components, props are simpler and more explicit. For complex application state with frequent updates, specialized state management libraries might be more appropriate.",
+    "difficulty": 2,
+    "topic": "React Patterns"
+  },
+  {
+    "question": "How do you define and consume a custom Hook in React? Why might you create one?",
+    "options": [
+      "A custom Hook is a function prefixed with “use” that can call other hooks; you consume it by calling it inside a function component. You create one to encapsulate and reuse stateful logic.",
+      "A custom Hook is a special component; you include it via JSX. You create one to define global styles.",
+      "A custom Hook is an HOC; you wrap your component with it. You create one to log props.",
+      "A custom Hook is a CSS file; you import it for styling."
+    ],
+    "correctIndex": 0,
+    "explanation": "Custom Hooks let you extract and share stateful logic (effects, state updates) between components by writing a function starting with “use” that itself can call built-in Hooks.",
+    "difficulty": 2,
+    "topic": "React Hooks"
+  },
+  {
+    "question": "Explain the difference between controlled and uncontrolled components in React forms.",
+    "options": [
+      "There is no difference",
+      "Controlled components use refs; uncontrolled use state",
+      "Controlled components keep form state in React state and update via onChange; uncontrolled use refs to read values directly from the DOM",
+      "Controlled: class components only; Uncontrolled: functional components only"
+    ],
+    "correctIndex": 2,
+    "explanation": "Controlled components store form data in React state, with each input having a value prop tied to state and an onChange handler that updates that state. This gives React complete control over the form's behavior. Uncontrolled components store form data in the DOM itself, using refs to access values when needed (e.g., on form submission). Controlled components offer more immediate validation and conditional rendering but require more code, while uncontrolled components are simpler but offer less control.",
+    "difficulty": 1,
+    "topic": "Forms"
+  },
+  {
+    "question": "How would you handle form inputs in React? What patterns or hooks are commonly used?",
+    "options": [
+      "Use controlled inputs with useState for each field or useReducer for complex forms, or leverage form libraries like Formik or React Hook Form",
+      "Always use uncontrolled inputs with document.querySelector",
+      "Use only class components for forms",
+      "Use custom HTML elements instead of React controls"
+    ],
+    "correctIndex": 0,
+    "explanation": "For simple forms, you can manage each input’s value via useState; for more complex state or validation, useReducer or libraries like Formik/React Hook Form help organize and validate form data.",
+    "difficulty": 2,
+    "topic": "Forms"
+  },
+  {
+    "question": "What is a React portal and when would you use one?",
+    "options": [
+      "A portal lets you render a subtree into a DOM node outside the parent hierarchy; use it for modals, tooltips, or overlays",
+      "A portal is a router component for navigation",
+      "Portals are only for server-side rendering",
+      "Portals inject global CSS"
+    ],
+    "correctIndex": 0,
+    "explanation": "Portals allow you to mount React children into a DOM node outside the root (e.g., document.body), which is ideal for UI elements like modals or pop-ups that need to escape overflow or stacking contexts.",
+    "difficulty": 2,
+    "topic": "React"
+  },
+  {
+    "question": "What are the typical lifecycle phases of a React component and corresponding hooks/methods?",
+    "options": [
+      "Mounting (constructor/useEffect(() => {}, [])), Updating (render/useEffect without empty array), Unmounting (componentWillUnmount/cleanup function in useEffect)",
+      "Initialization, Rendering, Destruction only",
+      "Loading and Completed only",
+      "React has no lifecycle phases"
+    ],
+    "correctIndex": 0,
+    "explanation": "Class components have methods like constructor, componentDidMount, componentDidUpdate, componentWillUnmount; function components use useEffect with different dependency arrays to emulate mount, update, and cleanup.",
+    "difficulty": 2,
+    "topic": "React"
+  },
+  {
+    "question": "How do functional components with Hooks compare to class components in terms of lifecycle and state?",
+    "options": [
+      "Hooks unify state and side effects in functions, replacing class lifecycle methods with useState and useEffect",
+      "Hooks are only for styling, classes handle state",
+      "Functional components cannot have state",
+      "Class components are always preferred"
+    ],
+    "correctIndex": 0,
+    "explanation": "Hooks allow you to use state (useState) and lifecycle-like side effects (useEffect) in plain functions, removing the need for class-based lifecycle methods and this keyword.",
+    "difficulty": 1,
+    "topic": "React"
+  },
+  {
+    "question": "What is server-side rendering (SSR) in React, and why might you use it?",
+    "options": [
+      "SSR renders React components to HTML on the server for faster first paint and SEO; the client then hydrates the markup",
+      "SSR compiles TypeScript on the server only",
+      "SSR is for styling CSS on the server",
+      "SSR is a testing framework"
+    ],
+    "correctIndex": 0,
+    "explanation": "With SSR (e.g., Next.js), React components are rendered on the server to HTML, improving perceived load time and SEO, then React hydrates on the client to attach event handlers.",
+    "difficulty": 2,
+    "topic": "Performance"
+  },
+  {
+    "question": "Describe how React’s event system works, including synthetic events and delegation.",
+    "options": [
+      "React attaches native event handlers directly to each DOM node",
+      "React uses event delegation, attaching listeners at the root, and normalizes events via SyntheticEvent objects",
+      "All events bypass React and interact directly with the browser's native event system",
+      "SyntheticEvents are only used for custom events created by developers"
+    ],
+    "correctIndex": 1,
+    "explanation": "React implements a synthetic event layer that pools events and uses a single listener on the document root, delegating to specific components and normalizing event APIs across browsers.",
+    "difficulty": 2,
+    "topic": "React"
+  },
+  {
+    "question": "How do you perform side effects at specific stages of a component’s lifecycle in a functional component?",
+    "options": [
+      "Use the useLifecycle hook with stage-specific callbacks",
+      "Implement the componentDidEffect method in your functional component",
+      "Create a custom hook that wraps useState to handle lifecycle events",
+      "Use useEffect with appropriate dependency arrays to control when code executes"
+    ],
+    "correctIndex": 3,
+    "explanation": "In functional components, the useEffect hook replaces lifecycle methods from class components and allows you to perform side effects at specific points. The dependency array controls when the effect runs: omitting it causes the effect to run after every render, an empty array ([]) makes it run only once after initial render (similar to componentDidMount), and including dependencies makes it run when those values change (similar to componentDidUpdate with specific props/state). The cleanup function returned from useEffect runs before the component unmounts (like componentWillUnmount) and before re-running the effect when dependencies change. There is no built-in 'useLifecycle' hook or 'componentDidEffect' method in React, and while custom hooks can abstract effect logic, they still use useEffect internally.",
+    "difficulty": 2,
+    "topic": "React Hooks"
+  },
+  {
+    "question": "How do you define default props and prop types in a TypeScript React component?",
+    "options": [
+      "Use the TypeScript.defaultProps compiler directive",
+      "Define an interface for props and use ES6 default parameter values in functional components",
+      "Always use the PropTypes library even with TypeScript",
+      "Import the DefaultProps utility type from 'react/types'"
+    ],
+    "correctIndex": 1,
+    "explanation": "In TypeScript React components, prop types are defined using interfaces or type aliases that describe the shape of the props object. For functional components, the most idiomatic way to handle default props is to use ES6 default parameter values directly in the function signature (e.g., function Button({ color = 'blue' }: ButtonProps)). This approach integrates well with TypeScript's type system and is recommended in modern React. For class components, you can use the static defaultProps property. Unlike JavaScript React, TypeScript provides compile-time type checking for props, so the PropTypes library for runtime checking is generally unnecessary. There is no TypeScript.defaultProps compiler directive or DefaultProps utility type in the React package.",
+    "difficulty": 2,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "How do you type a React class component's state in TypeScript?",
+    "options": [
+      "Create a State type and pass it as the second generic parameter to React.Component<P, S>",
+      "Use the @state decorator above each state property",
+      "Import StateType from React and implement it in your class",
+      "Call React.createState<T>() in the constructor"
+    ],
+    "correctIndex": 0,
+    "explanation": "In TypeScript, you type a React class component's state by first creating an interface or type alias that defines the shape of your state object. Then, you pass this type as the second generic parameter when extending React.Component. For example: 'interface MyState { count: number; isActive: boolean; } class MyComponent extends React.Component<MyProps, MyState> { ... }'. The first generic parameter is for props, and the second is for state. You must initialize the state in the constructor or as a class property according to this type definition. There are no @state decorators, StateType imports, or React.createState methods in React's API - these are fictional constructs that don't exist in the actual React TypeScript ecosystem.",
+    "difficulty": 2,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "What is the difference between interface and type in TypeScript when defining props?",
+    "options": [
+      "Type aliases can use unions and mapped types; interfaces are always extendable and can be merged",
+      "Interfaces are only available in newer TypeScript versions",
+      "Type aliases provide better performance in all cases",
+      "Interfaces can only be used with classes, not functional components"
+    ],
+    "correctIndex": 0,
+    "explanation": "The key differences between interfaces and type aliases in TypeScript are: 1) Interfaces can be extended using the 'extends' keyword and can participate in declaration merging (adding new fields to an existing interface), while type aliases cannot be changed after creation; 2) Type aliases can represent union types, mapped types, conditional types, and primitives, while interfaces can only describe object shapes; 3) Interface names always appear in their original form in error messages, which can be helpful for debugging; 4) Using interfaces with 'extends' is often more performant for the TypeScript compiler than type aliases with intersections. Both can be used to define React component props, and the choice is often based on personal preference. The TypeScript team recommends using interfaces until you need features only available in type aliases.",
+    "difficulty": 1,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "How do you type an event handler in React with TypeScript (e.g., onClick or onChange)?",
+    "options": [
+      "Import EventHandler from 'react-dom/events' and use it as a generic type",
+      "Use specific event types like React.MouseEvent<HTMLElement> based on the event and element type",
+      "Declare all event handlers with the DOM.EventHandler interface",
+      "Event handlers in React automatically infer types and don't need explicit typing"
+    ],
+    "correctIndex": 1,
+    "explanation": "In React with TypeScript, event handlers are typed using specific event types from the React namespace that correspond to the DOM event being handled. For example, for onClick handlers, you would use React.MouseEvent<HTMLButtonElement> (or other HTML element type depending on what element the handler is attached to). For onChange events on inputs, you would use React.ChangeEvent<HTMLInputElement>. These types provide proper typing for event properties and methods, enabling type checking and autocompletion. While event types can sometimes be inferred when defined inline, explicit typing is necessary when defining handler functions separately. React provides many specific event types (FormEvent, DragEvent, etc.) based on the standard DOM events. There is no 'EventHandler' import from 'react-dom/events' or 'DOM.EventHandler' interface - these are fictional constructs.",
+    "difficulty": 2,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "How do you use generics in a TypeScript React component? Give an example.",
+    "options": [
+      "Import the Generic utility from 'react/types' and wrap your component with it",
+      "Add a type parameter in angle brackets before the props parameter: function List<T>(props: { items: T[] })",
+      "Use the @generic decorator above your component definition",
+      "Call React.createGeneric() before defining your component"
+    ],
+    "correctIndex": 1,
+    "explanation": "In TypeScript React components, generics are used to create reusable components that can work with different types while maintaining type safety. You implement generics by adding type parameters in angle brackets (<T>) before the props parameter. For example, 'function List<T>(props: { items: T[] }) { return <ul>{props.items.map((item, i) => <li key={i}>{item.toString()}</li>)}</ul> }'. This allows the List component to work with arrays of any type while preserving type information. For class components, you can use generics similarly: 'class List<T> extends React.Component<{ items: T[] }> { ... }'. When using the component, TypeScript can often infer the type argument from the props: '<List items={[1, 2, 3]} />' (inferred as List<number>), or you can specify it explicitly: '<List<string> items={['a', 'b']} />'. There is no 'Generic' utility, @generic decorator, or React.createGeneric() method in React or TypeScript - these are fictional constructs.",
+    "difficulty": 2,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "What are some common utility types in TypeScript and how might they be used in React?",
+    "options": [
+      "Omit<T, K> removes properties; Partial<T> makes properties optional; Pick<T, K> selects specific properties",
+      "Partial<T> converts properties to readonly; Pick<T, K> makes properties required; Omit<T, K> converts to union types",
+      "Pick<T, K> is for class components only; Omit<T, K> works exclusively with hooks; Partial<T> is deprecated in React 18+",
+      "These utility types are only available when using the @types/react-utilities package"
+    ],
+    "correctIndex": 0,
+    "explanation": "TypeScript provides several built-in utility types that are particularly useful in React applications: 1) Partial<T> makes all properties of an interface optional, which is helpful when creating props for components that have many optional properties or when implementing partial updates to state; 2) Pick<T, K> creates a new type by selecting only the specified properties from T, useful for creating more focused prop types or when a component needs only a subset of a larger interface; 3) Omit<T, K> creates a type by excluding specific properties from T, helpful when you want to use most properties from an interface but exclude a few; 4) Record<K, T> creates an object type with keys of type K and values of type T, useful for mapping structures; 5) Required<T> makes all properties required, the opposite of Partial. In React, these utilities help create precise prop types, manage component state types, and create variations of existing interfaces without duplication. They're built into TypeScript and don't require additional packages.",
+    "difficulty": 2,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "How does TypeScript infer types for useState and props if you don’t annotate them explicitly?",
+    "options": [
+      "TypeScript uses the React.inferType utility to determine types at runtime",
+      "It infers types from the initial values, usage context, and parent component declarations",
+      "All unannotated React types default to unknown in strict mode",
+      "Props are always inferred as Record<string, any> unless explicitly typed"
+    ],
+    "correctIndex": 1,
+    "explanation": "TypeScript uses contextual typing to infer types in React components when explicit annotations aren't provided. For useState, the type is inferred from the initial value: const [count, setCount] = useState(0) infers count as number. For complex state with potential null values or unions, explicit typing is recommended: useState<User | null>(null). For props, TypeScript infers types from how the component is used and the properties accessed within it. If a parent passes title='Hello' to a child component, the title prop is inferred as string in the child. TypeScript also uses control flow analysis to refine types based on conditionals and type guards within the component. The compiler analyzes the entire usage context to determine the most specific type possible. There is no React.inferType utility, and unannotated types don't default to unknown - these are fictional behaviors. While TypeScript's inference is powerful, explicit type annotations are recommended for complex props and state to improve code readability and catch errors earlier.",
+    "difficulty": 1,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "What is the as keyword used for in TypeScript with React (e.g., as const, as HTMLInputElement)?",
+    "options": [
+      "It performs runtime type validation during component rendering",
+      "It's a type assertion operator that tells the TypeScript compiler to treat a value as a specific type",
+      "It's a JSX-specific operator that creates component aliases",
+      "It's used to explicitly mark optional props as required"
+    ],
+    "correctIndex": 1,
+    "explanation": "The 'as' keyword in TypeScript is a type assertion operator that tells the compiler to treat a value as a specific type, overriding TypeScript's inferred type. In React with TypeScript, it serves two main purposes: 1) When used with DOM elements, it helps specify the exact element type (e.g., 'event.target as HTMLInputElement' allows access to input-specific properties like value); 2) When used as 'as const', it creates a readonly tuple with literal types rather than more general types (e.g., [1, 2] as const is typed as readonly [1, 2] instead of number[]). The 'as' operator was specifically designed for JSX files (.tsx) because the angle bracket assertion syntax (<Type>value) conflicts with JSX syntax. Unlike type casting in some languages, 'as' performs no runtime conversion or validation—it's purely a compile-time instruction to the TypeScript compiler. It should be used carefully as it effectively tells TypeScript to trust your type judgment over its own inference.",
+    "difficulty": 2,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "How do you type the useRef Hook for values vs DOM elements in TypeScript?",
+    "options": [
+      "DOM elements must use the RefObject utility: RefObject<HTMLElement>(null)",
+      "All refs must be typed as any to allow for both DOM elements and values",
+      "Use useRef<Type>(initialValue) for values and useRef<HTMLElementType>(null) for DOM elements",
+      "The RefType utility must be imported from 'react/types' for proper typing"
+    ],
+    "correctIndex": 2,
+    "explanation": "In TypeScript, the useRef Hook needs different type approaches depending on whether you're referencing a value or a DOM element. For mutable values, you provide the type as a generic parameter and an initial value of that type: const countRef = useRef<number>(0). The ref object will have type React.MutableRefObject<number>. For DOM elements, you typically initialize with null and specify the HTML element type: const inputRef = useRef<HTMLInputElement>(null). When used with React's ref attribute, this has type React.RefObject<HTMLInputElement>. The key difference is that DOM refs might be null until the component mounts, while value refs typically start with a non-null value. TypeScript's type system helps ensure you don't try to access properties on potentially null DOM refs without checking. There is no RefType utility that needs to be imported, and while React does have a createRef function, useRef is the recommended approach for functional components as it persists across renders. When accessing DOM element properties, you should check for null: if (inputRef.current) { inputRef.current.focus(); }.",
+    "difficulty": 2,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "How do you type the useContext Hook in TypeScript, and what challenges might you encounter?",
+    "options": [
+      "You must create a separate TypeContext utility for each context",
+      "The type is automatically inferred from context consumers, not providers",
+      "Specify the type when creating context and handle potential null values with proper checks",
+      "Context values must always be wrapped in a generic Container<T> type"
+    ],
+    "correctIndex": 2,
+    "explanation": "In TypeScript, typing the useContext Hook involves specifying the type when creating the context with createContext<T>(defaultValue). The main challenge is handling potentially null or undefined default values. When a context is created with a null default value (createContext<User | null>(null)), consumers must check for null before using properties. A common pattern is to create a custom hook that wraps useContext with a null check: const useUser = () => { const user = useContext(UserContext); if (user === null) throw new Error('useUser must be used within a UserProvider'); return user; }. This removes the null from the return type, making it safer to use. Another challenge is that TypeScript doesn't enforce that a component is wrapped in the corresponding provider, so runtime errors can still occur. There's no need for special TypeContext utilities or Container types - these are fictional constructs. The type is inferred from the createContext call, not from consumers.",
+    "difficulty": 2,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "In TypeScript, how can you ensure that the props passed to a component match its defined interface?",
+    "options": [
+      "Use the React.validateProps() method to check props at runtime",
+      "Define a props interface and annotate the component's parameter with it for compile-time checking",
+      "Props are automatically type-checked without any additional code",
+      "Add @ValidateProps decorator above your component definition"
+    ],
+    "correctIndex": 1,
+    "explanation": "In TypeScript, the primary way to ensure props match a defined interface is through static type checking at compile time. You define an interface or type for your component's props and then annotate the component's props parameter with it: 'interface ButtonProps { text: string; onClick?: () => void; } function Button({ text, onClick }: ButtonProps) { ... }'. TypeScript will then verify at compile time that all required props are provided and that their types match the interface. This approach catches errors before runtime and provides IDE benefits like autocompletion. Unlike PropTypes in JavaScript, which performs runtime validation, TypeScript's type checking happens during development and doesn't add any runtime overhead. There is no React.validateProps() method or @ValidateProps decorator in React or TypeScript - these are fictional. While props aren't automatically type-checked without annotations, TypeScript's inference can sometimes determine prop types based on usage, but explicit interfaces are clearer and more maintainable.",
+    "difficulty": 1,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "What is the difference between declared and inferred types in TypeScript React code?",
+    "options": [
+      "Inferred types are always less specific than declared types",
+      "Declared types are explicitly written by the developer; inferred types are automatically deduced by TypeScript",
+      "Declared types only work with class components; inferred types only work with functional components",
+      "Inferred types are faster at runtime because they use JIT compilation"
+    ],
+    "correctIndex": 1,
+    "explanation": "In TypeScript, declared types are explicitly written by the developer (e.g., 'const count: number = 0' or 'function add(a: number, b: number): number { ... }'), while inferred types are automatically deduced by the TypeScript compiler based on initialization values and usage context (e.g., 'const count = 0' is inferred as number). In React, both approaches are useful in different scenarios. Declared types provide clarity, documentation, and can express complex types that might be difficult to infer. They're essential for props interfaces, state types with unions, and when the inferred type would be too broad. Inferred types reduce verbosity and automatically update when implementation changes. TypeScript's inference is quite sophisticated and often correctly determines types from context, especially with useState and event handlers. Neither approach affects runtime performance since TypeScript types are erased during compilation. Both work equally well with functional and class components. The choice between declared and inferred types is often a matter of code style and readability rather than functionality.",
+    "difficulty": 1,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "How do you handle nullable or undefined props and state in TypeScript with React?",
+    "options": [
+      "Use the React.Nullable<T> utility type for all optional values",
+      "Include union types (T | null | undefined) and use type guards, optional chaining, or nullish coalescing",
+      "Nullable values are not allowed in strict TypeScript mode with React",
+      "Always use the NonNullable utility to remove null from all prop types"
+    ],
+    "correctIndex": 1,
+    "explanation": "In TypeScript with React, nullable or undefined values are handled through union types and TypeScript's built-in safety features. The recommended approach is to explicitly include null or undefined in your type definitions (e.g., useState<string | null>(null)) and then use TypeScript's safety features to handle these cases: 1) Type guards (if (value !== null)) to narrow types in conditional blocks; 2) Optional chaining (user?.name) to safely access properties that might be on null/undefined objects; 3) Nullish coalescing (value ?? defaultValue) to provide fallbacks; 4) Default parameter values for props with potential undefined values. Using strictNullChecks in tsconfig.json is highly recommended as it forces explicit handling of these cases. For component props, you can use optional properties (prop?: string) which implicitly includes undefined in the type. There is no React.Nullable utility type - this is fictional. The NonNullable utility does exist but is typically used in specific transformations, not as a blanket approach for all props.",
+    "difficulty": 2,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "What is the purpose of TypeScript’s non-null assertion operator (e.g., !) in React code?",
+    "options": [
+      "It performs a runtime check that throws an error if the value is null",
+      "It converts nullable types to their boolean equivalent for conditional rendering",
+      "It tells the TypeScript compiler to remove null and undefined from a type without runtime checks",
+      "It's used to mark required props in a component's interface"
+    ],
+    "correctIndex": 2,
+    "explanation": "TypeScript's non-null assertion operator (!) is a type system directive that tells the compiler to treat a value as non-null and non-undefined, even if the type system thinks it might be. For example, with 'ref.current!.focus()', the ! removes null and undefined from ref.current's type, allowing you to call methods on it without TypeScript errors. This is purely a compile-time mechanism with no runtime effect - it doesn't add any checks or throw errors if the value is actually null at runtime. In React, it's commonly used with refs (ref.current!), when accessing DOM elements after checking they exist elsewhere, or when you're certain a value exists despite TypeScript's uncertainty. However, it should be used sparingly as it bypasses TypeScript's safety checks. Better alternatives include: 1) Proper null checking with if statements; 2) Optional chaining (ref.current?.focus()); 3) Type guards; or 4) The nullish coalescing operator (??). The non-null assertion is essentially you telling TypeScript 'trust me, I know this won't be null' - which can lead to runtime errors if you're wrong.",
+    "difficulty": 1,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "How do you properly type the state setter function returned by useState in TypeScript?",
+    "options": [
+      "The setter function must be explicitly typed as (value: T) => void",
+      "It's automatically typed as React.Dispatch<React.SetStateAction<Type>> when using useState<Type>",
+      "You must import the StateSetter<T> type from 'react/types'",
+      "State setters can only accept the exact same type and not functions in TypeScript"
+    ],
+    "correctIndex": 1,
+    "explanation": "In TypeScript, the state setter function returned by useState is automatically typed as React.Dispatch<React.SetStateAction<T>> when you use useState<T>. This complex type accurately captures the dual nature of React's state setters, which can accept either: 1) A direct new value of type T, or 2) A function that receives the previous state and returns a new state ((prevState: T) => T). For example, with const [count, setCount] = useState<number>(0), setCount is typed to accept either a number (setCount(5)) or a function that takes the previous count and returns a new number (setCount(prev => prev + 1)). This typing happens automatically through type inference when you specify the generic type parameter to useState. You don't need to manually type the setter or import any special types - React's type definitions handle this for you. There is no StateSetter type that needs to be imported from 'react/types' - this is fictional. The correct typing ensures type safety while maintaining the flexibility of React's state update patterns.",
+    "difficulty": 2,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "How do you type React component props that include a children element using TypeScript?",
+    "options": [
+      "Children must be typed using the special @ChildrenProp decorator",
+      "Use React.PropsWithChildren<Props> utility type or add children?: React.ReactNode to your props interface",
+      "Import ChildrenType from 'react-types' and use it as a generic parameter",
+      "In TypeScript, children are always typed as JSX.Element[] and cannot be customized"
+    ],
+    "correctIndex": 1,
+    "explanation": "In TypeScript React components, there are two main approaches to typing props that include children: 1) Use the React.PropsWithChildren utility type which wraps your props interface and adds the children property: 'type CardProps = React.PropsWithChildren<{ title: string }>'; 2) Explicitly add the children property to your props interface: 'interface CardProps { title: string; children?: React.ReactNode; }'. React.ReactNode is the most flexible type for children, as it allows for any valid JSX content (elements, strings, numbers, arrays, null, undefined, etc.). For more specific requirements, you can use more restrictive types like JSX.Element (only React elements), JSX.Element[] (array of elements), or even specific component types. The optional modifier (?) is typically used because not all instances of a component need to provide children. There is no @ChildrenProp decorator or special import from 'react-types' - these are fictional. Children are not automatically typed as JSX.Element[] - this would be too restrictive for many use cases.",
+    "difficulty": 2,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "What are key differences between TypeScript's any, unknown, void, and never types, especially in the context of React components?",
+    "options": [
+      "void is used for functions that don't return anything; never is for functions that throw errors",
+      "any and unknown are interchangeable in React event handlers",
+      "unknown requires type checking before use; any bypasses type checking completely",
+      "never is used for components that don't render anything visible"
+    ],
+    "correctIndex": 2,
+    "explanation": "TypeScript's special types serve different purposes in React development: 1) 'any' disables type checking completely and should be used sparingly as an escape hatch when you can't or don't want to define a specific type. In React, it's sometimes used for complex props or state that are difficult to type precisely. 2) 'unknown' is a type-safe alternative to any - it requires type checking or assertion before you can perform operations on it, making it ideal for API responses or external data. 3) 'void' represents the absence of a return value and is commonly used for event handlers and side-effect functions in React components (e.g., onClick handlers). 4) 'never' represents values that can never occur and is useful for exhaustive type checking in discriminated unions, unreachable code paths, and functions that always throw errors. While void is indeed used for functions that don't return anything, never is not just for functions that throw errors - it has broader applications in type narrowing and exhaustive checks. The 'never' type is not specifically for components that don't render anything (those typically return null or React.Fragment). Similarly, any and unknown are not interchangeable in event handlers - unknown would require type assertions before use.",
+    "difficulty": 2,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "How do you use TypeScript with React Hooks like useCallback, useMemo, and useReducer?",
+    "options": [
+      "Import HookTypes from 'react/types' and wrap each hook with it",
+      "All hooks must be explicitly typed with the @TypedHook decorator",
+      "They accept generic type parameters: useReducer<State, Action>, useCallback<ReturnType>, etc.",
+      "Hooks cannot be properly typed in TypeScript and require any assertions"
+    ],
+    "correctIndex": 2,
+    "explanation": "React Hooks in TypeScript use generic type parameters to provide type safety. For useCallback, you can specify the function's type: useCallback<(id: number) => void>(callback, deps). This ensures the callback's parameters and return type are correctly typed. For useMemo, you can specify the return type: useMemo<User[]>(() => filterUsers(users), [users]). This is especially useful when the inferred type might be too broad. For useReducer, you provide both state and action types: useReducer<State, Action>(reducer, initialState). This ensures your reducer function properly handles all action types and returns the correct state shape. TypeScript can often infer these types correctly, but explicit typing helps with complex state or when the inferred type is insufficient. There is no need to import special 'HookTypes' or use decorators - these are fictional. React's type definitions already include proper typing for all standard hooks. The generic parameters follow TypeScript's standard generic syntax and provide compile-time type checking without runtime overhead.",
+    "difficulty": 2,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "How do you configure TypeScript’s tsconfig.json for a React project? What are recommended compiler options?",
+    "options": [
+      "Set noImplicitAny: false to avoid type errors with React components",
+      "TypeScript automatically configures itself when React is detected in package.json",
+      "Configure jsx: 'react-jsx', strict: true, enable .tsx files, and target modern JavaScript (ES2015+)",
+      "Set reactCompilerOptions to 'modern' and disable type checking for faster development"
+    ],
+    "correctIndex": 2,
+    "explanation": "For React projects with TypeScript, the tsconfig.json file requires specific configuration options. Key recommended settings include: 1) jsx: 'react-jsx' (for React 17+ automatic JSX transform) or 'react' (for classic JSX transform), which enables JSX syntax processing; 2) strict: true, which enables a suite of type-checking flags for better type safety; 3) allowJs: true and jsx: 'react-jsx', which allow mixing .js/.jsx and .ts/.tsx files; 4) target: 'ES2015' or newer, which specifies the ECMAScript version to compile to; 5) esModuleInterop: true, which helps with import compatibility; 6) lib: ['DOM', 'DOM.Iterable', 'ESNext'], which includes type definitions for browser APIs and modern JavaScript features. Modern React projects often use additional options like forceConsistentCasingInFileNames: true and skipLibCheck: true for better development experience. There is no 'reactCompilerOptions' setting - this is fictional. While disabling strictness flags like noImplicitAny might reduce type errors initially, it defeats the purpose of using TypeScript and is not recommended for production code. TypeScript does not auto-configure itself based on package.json dependencies.",
+    "difficulty": 2,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "Why might you use a discriminated union type in React props?",
+    "options": [
+      "To create polymorphic components that render differently based on a 'type' or 'variant' prop",
+      "To automatically generate documentation for your component props",
+      "Discriminated unions are only useful in reducers, not in component props",
+      "To combine multiple interfaces without type checking"
+    ],
+    "correctIndex": 0,
+    "explanation": "Discriminated union types in React props are powerful for creating components that can render in multiple ways based on a specific 'discriminant' property (often called 'type', 'variant', or 'mode'). This pattern enables type-safe conditional rendering where TypeScript can enforce that the correct props are provided for each variant. For example, you might create a Button component that can be a regular button, a link button, or an icon button, each with different required props: interface BaseButtonProps { variant: 'regular' | 'link' | 'icon'; disabled?: boolean; } interface RegularButtonProps extends BaseButtonProps { variant: 'regular'; label: string; } interface LinkButtonProps extends BaseButtonProps { variant: 'link'; href: string; label: string; } interface IconButtonProps extends BaseButtonProps { variant: 'icon'; icon: React.ReactNode; ariaLabel: string; } type ButtonProps = RegularButtonProps | LinkButtonProps | IconButtonProps; The discriminant property ('variant' in this case) allows TypeScript to narrow the type within conditional blocks. When checking if props.variant === 'link', TypeScript knows that props.href must exist. This enables exhaustive type checking and prevents invalid prop combinations. Discriminated unions are not just for reducers - they're extremely useful in component props for complex UIs. They don't automatically generate documentation, though tools like Storybook can leverage these types. And they specifically enhance type checking rather than bypassing it.",
+    "difficulty": 2,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "How does TypeScript support default parameter values in functional components compared to defaultProps?",
+    "options": [
+      "TypeScript requires using the DefaultProps generic for all default values",
+      "Parameter defaults (e.g., {name = 'Default'}) are the preferred approach in modern TypeScript React",
+      "defaultProps is the only way to properly type default values in TypeScript",
+      "Default values must be defined in a separate interface with Required<Props>"
+    ],
+    "correctIndex": 1,
+    "explanation": "In modern TypeScript React development, function parameter default values are generally preferred over the older defaultProps pattern. With parameter defaults, you can define defaults directly in the function signature: function Button({ label = 'Click me', type = 'button', disabled = false }: ButtonProps) {...}. This approach has several advantages: 1) It's more concise and keeps defaults close to the prop definitions; 2) TypeScript correctly infers that these props are optional in the props type; 3) It works seamlessly with destructuring patterns; 4) The defaults are applied at the time the component is called. While the class component defaultProps pattern (Button.defaultProps = {...}) is still supported in TypeScript, it has limitations: it requires extra type assertions in some cases, doesn't integrate as well with TypeScript's type system, and React team has indicated it may be deprecated in the future. There is no 'DefaultProps' generic in React's type definitions - this is fictional. Similarly, there's no requirement to define defaults in a separate interface with Required<Props>. For complex components, you might occasionally use both approaches together, but parameter defaults are generally simpler and more type-safe in modern functional components.",
+    "difficulty": 1,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "What is the significance of the new JSX transform (React 17+) for TypeScript projects?",
+    "options": [
+      "It requires manually importing the JSX namespace in every component file",
+      "The new transform only works with JavaScript, not TypeScript",
+      "You no longer need to import React in scope for JSX files; set jsx: 'react-jsx' in tsconfig.json",
+      "It forces all components to use the new Suspense API"
+    ],
+    "correctIndex": 2,
+    "explanation": "The new JSX transform introduced in React 17 brings a significant improvement to TypeScript React projects: you no longer need to import React in every file that uses JSX. Prior to React 17, the JSX syntax was transformed into React.createElement calls, requiring React to be in scope. With the new transform, JSX is converted to _jsx function calls from a new runtime-specific package, eliminating this requirement. To enable this in TypeScript, you need to set jsx: 'react-jsx' in your tsconfig.json (instead of the older 'react' setting). For custom JSX libraries, you can configure the jsxImportSource compiler option. This change simplifies code by removing unnecessary imports, reduces bundle size slightly, and makes the JSX transform more efficient. The transform works equally well with both class and functional components - it's not limited to either. It doesn't require any manual namespace imports, nor does it force the use of any specific React features like Suspense. The transform is fully compatible with TypeScript - in fact, TypeScript 4.1+ has built-in support for it. This change is backward compatible, so existing code continues to work, but new projects benefit from the cleaner syntax.",
+    "difficulty": 1,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "What is the purpose of TypeScript's non-null assertion operator (e.g., !) in React code?",
+    "options": [
+      "It performs a runtime check that throws an error if the value is null",
+      "It converts nullable types to their boolean equivalent for conditional rendering",
+      "It tells the TypeScript compiler to remove null and undefined from a type without runtime checks",
+      "It's used to mark required props in a component's interface"
+    ],
+    "correctIndex": 2,
+    "explanation": "TypeScript's non-null assertion operator (!) is a type system directive that tells the compiler to treat a value as non-null and non-undefined, even if the type system thinks it might be. For example, with 'ref.current!.focus()', the ! removes null and undefined from ref.current's type, allowing you to call methods on it without TypeScript errors. This is purely a compile-time mechanism with no runtime effect - it doesn't add any checks or throw errors if the value is actually null at runtime. In React, it's commonly used with refs (ref.current!), when accessing DOM elements after checking they exist elsewhere, or when you're certain a value exists despite TypeScript's uncertainty. However, it should be used sparingly as it bypasses TypeScript's safety checks. Better alternatives include: 1) Proper null checking with if statements; 2) Optional chaining (ref.current?.focus()); 3) Type guards; or 4) The nullish coalescing operator (??). The non-null assertion is essentially you telling TypeScript 'trust me, I know this won't be null' - which can lead to runtime errors if you're wrong.",
+    "difficulty": 1,
+    "topic": "TypeScript & React"
+  }
+]

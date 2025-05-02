@@ -1,0 +1,1186 @@
+[
+  {
+    "question": "What built-in tool can you use to profile CPU and memory usage of a running Node.js process?",
+    "options": ["nodemon", "Chrome DevTools", "npm audit", "Node Inspector"],
+    "correctIndex": 1,
+    "explanation": "Node.js integrates with Chrome DevTools, allowing you to start and stop CPU and memory profiling directly from your script or REPL using console.profile and console.profileEnd. The collected profile appears in the DevTools Performance panel with call stacks, memory snapshots, and flame charts without external dependencies.",
+    "difficulty": 2,
+    "topic": "Node.js"
+  },
+  {
+    "question": "Which command-line flag increases V8’s old-space (heap) memory limit?",
+    "options": ["--trace-gc", "--max-old-space-size", "--expose-gc", "--max-stack-size"],
+    "correctIndex": 1,
+    "explanation": "The --max-old-space-size=<SIZE> flag (in MiB) configures V8’s Old Space heap limit for Node.js. For example, node --max-old-space-size=2048 index.js sets a 2 GB heap limit, helping memory-intensive applications avoid out-of-memory errors.",
+    "difficulty": 2,
+    "topic": "Node.js"
+  },
+  {
+    "question": "How is the default maximum V8 heap size typically determined in modern (v14+) 64-bit Node.js processes?",
+    "options": ["Fixed at ~1.5 GB", "Scales based on available system memory", "Fixed at 512 MB", "Set by the OS kernel"],
+    "correctIndex": 1,
+    "explanation": "In Node.js v14 and later, V8’s default heap limit is computed by V8’s internal heuristics at startup using the host’s physical memory, choosing an appropriate Old Space size dynamically.",
+    "difficulty": 2,
+    "topic": "Node.js"
+  },
+  {
+    "question": "Which libuv function schedules work to run on its thread pool?",
+    "options": ["uv_queue_work", "uv_run", "uv_loop_init", "uv_async_send"],
+    "correctIndex": 0,
+    "explanation": "uv_queue_work(loop, req, work_cb, after_work_cb) submits a work_cb callback to a libuv thread-pool thread and then invokes after_work_cb on the event loop once the work completes, offloading CPU-bound C/C++ tasks without blocking the JavaScript thread.",
+    "difficulty": 3,
+    "topic": "Node.js"
+  },
+  {
+    "question": "Which TypeScript utility type makes all properties of T readonly?",
+    "options": ["Readonly<T>", "Mutable<T>", "Partial<T>", "Required<T>"],
+    "correctIndex": 0,
+    "explanation": "The Readonly<Type> utility constructs a type where every property of Type is marked readonly, preventing assignments to those properties during type checking (though nested object fields remain mutable unless recursively made readonly).",
+    "difficulty": 1,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "Which tsconfig.json option enables *all* strict type-checking flags (including strictNullChecks)?",
+    "options": ["strict", "strictMode", "allStrict", "enableStrict"],
+    "correctIndex": 0,
+    "explanation": "The top-level \"strict\": true compiler option turns on the entire family of strict type-checking checks—noImplicitAny, strictNullChecks, strictFunctionTypes, and others—providing the strongest guarantees of type safety.",
+    "difficulty": 1,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "In tsconfig.json, which option specifies the directory where compiled JavaScript files are emitted?",
+    "options": ["outDir", "rootDir", "baseUrl", "paths"],
+    "correctIndex": 0,
+    "explanation": "\"outDir\": \"./dist\" tells the TypeScript compiler to place all .js, .d.ts, and source-map files into the specified directory, preserving the input folder structure under rootDir.",
+    "difficulty": 1,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "Which tsconfig.json setting defines the root folder of your TypeScript source files?",
+    "options": ["rootDir", "outDir", "declarationDir", "declarationMap"],
+    "correctIndex": 0,
+    "explanation": "By default, rootDir is inferred as the common path of all non-declaration inputs; setting \"rootDir\": \"./src\" overrides this, ensuring the compiled output mirrors the source layout relative to that folder.",
+    "difficulty": 1,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "Project References in TypeScript primarily help with what?",
+    "options": ["Incremental builds across multiple projects", "Auto-generating documentation", "Runtime module loading", "Tree-shaking imports"],
+    "correctIndex": 0,
+    "explanation": "Project References enable structuring large codebases into smaller subprojects, improving build times and enforcing separation. Using tsc --build, TypeScript can build only changed projects and their dependents.",
+    "difficulty": 2,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "Which keyword constrains a generic type parameter in TypeScript?",
+    "options": ["extends", "implements", "where", "constrains"],
+    "correctIndex": 0,
+    "explanation": "In function identity<T extends string>(arg: T) { … }, the extends keyword restricts T to types assignable to string, enabling safe property access and inference.",
+    "difficulty": 1,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "Which TypeScript utility type extracts the return type of a function type?",
+    "options": ["ReturnType<T>", "InstanceType<T>", "Extract<T, U>", "Awaited<T>"],
+    "correctIndex": 0,
+    "explanation": "ReturnType<() => number> evaluates to number, letting you derive types from function signatures for higher-order utilities or dynamic type transformations.",
+    "difficulty": 1,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "Which TypeScript utility type unwraps the type inside a Promise?",
+    "options": ["Awaited<T>", "Promise<T>", "NonNullable<T>", "Extract<T, U>"],
+    "correctIndex": 0,
+    "explanation": "Awaited<Promise<string>> resolves to string, modeling the behavior of the await operator; it also handles nested promises and conditional union types.",
+    "difficulty": 2,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "Which pair of tsconfig settings lets you create cleaner import paths (e.g., '@/components')?",
+    "options": ["baseUrl & paths", "rootDir & outDir", "declarationMap & sourceMap", "strict & skipLibCheck"],
+    "correctIndex": 0,
+    "explanation": "Setting \"baseUrl\": \"./\" and configuring \"paths\": { \"@/*\": [\"src/*\"] } allows absolute imports from the project root, avoiding long relative paths.",
+    "difficulty": 2,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "Declaration Merging in TypeScript allows you to do what?",
+    "options": ["Augment existing interfaces or namespaces", "Merge two runtime objects", "Combine types into a union", "Generate declaration files"],
+    "correctIndex": 0,
+    "explanation": "When two declarations share the same name (e.g., interface Foo { a: number } and later interface Foo { b: string }), the compiler merges them into a single Foo type containing both a and b.",
+    "difficulty": 2,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "Which experimental TypeScript feature enables runtime metadata reflection?",
+    "options": ["Decorators", "Enums", "Namespaces", "Generic Constraints"],
+    "correctIndex": 0,
+    "explanation": "Enabling \"experimentalDecorators\": true and \"emitDecoratorMetadata\": true in tsconfig lets tools like reflect-metadata capture design-time types (e.g., constructor parameter types) at runtime for dependency injection or validation frameworks.",
+    "difficulty": 2,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "Which ECMAScript edition introduced arrow functions and object destructuring?",
+    "options": ["ES6", "ES5", "ES3", "ESNext"],
+    "correctIndex": 0,
+    "explanation": "ES6 (ECMAScript 2015) added concise arrow function syntax (() => {}) and destructuring assignment (let { a, b } = obj), greatly improving code brevity and readability.",
+    "difficulty": 1,
+    "topic": "JavaScript"
+  },
+  {
+    "question": "What distinguishes a microtask from a macrotask in JavaScript’s event loop?",
+    "options": ["Microtasks run before the next macrotask", "Macrotasks run before microtasks", "They run in parallel", "They always run in separate threads"],
+    "correctIndex": 0,
+    "explanation": "After the call stack empties, the event loop drains the microtask queue (e.g., promise callbacks, process.nextTick) completely before scheduling the next macrotask (e.g., setTimeout, I/O callbacks), ensuring promise-based work executes promptly.",
+    "difficulty": 2,
+    "topic": "JavaScript"
+  },
+  {
+    "question": "Which Node.js module provides an API for offloading CPU-bound work to multiple threads?",
+    "options": ["child_process", "cluster", "worker_threads", "events"],
+    "correctIndex": 2,
+    "explanation": "The built-in worker_threads module lets you spawn Worker instances, each with its own event loop, enabling parallel JavaScript execution with shared memory support via SharedArrayBuffer and message passing via MessageChannel.",
+    "difficulty": 2,
+    "topic": "Node.js"
+  },
+  {
+    "question": "Which command-line flag enabled experimental ESM support in older Node.js versions?",
+    "options": ["--experimental-modules", "--esm", "--allow-ems", "--node-modules"],
+    "correctIndex": 0,
+    "explanation": "Prior to stabilized ES module support, Node.js required the --experimental-modules flag (and the .mjs extension) to load modules via import/export syntax until ES modules became unflagged in v14+.",
+    "difficulty": 2,
+    "topic": "Node.js"
+  },
+  {
+    "question": "Which TypeScript utility type constructs a subtype by selecting a set of properties K from T?",
+    "options": ["Pick<T, K>", "Omit<T, K>", "Partial<T>", "Required<T>"],
+    "correctIndex": 0,
+    "explanation": "Pick<Todo, \"title\" | \"completed\"> creates a new type with only the title and completed properties from Todo, useful for shaping API responses or form data.",
+    "difficulty": 1,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "Which TypeScript feature enables defining types based on conditional logic applied to other types?",
+    "options": ["Mapped Types", "Conditional Types", "Utility Types", "Intersection Types"],
+    "correctIndex": 1,
+    "explanation": "Conditional Types (using the `T extends U ? X : Y` syntax) let you choose one type or another based on whether a given type `T` satisfies the constraint `U`, enabling powerful type-level programming and type transformations.",
+    "difficulty": 1,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "Which keyword in a conditional type captures a subtype for reuse?",
+    "options": ["extract", "infer", "keyof", "extends"],
+    "correctIndex": 1,
+    "explanation": "The `infer` keyword lets you pattern-match on a type within a conditional and bind a part of it to a type variable, so you can reference that extracted subtype in the true branch of the conditional.",
+    "difficulty": 1,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "How do conditional types behave when applied to union types?",
+    "options": ["They fail to compile", "They distribute over each union member", "They return never", "They collapse the union"],
+    "correctIndex": 1,
+    "explanation": "When a conditional type is given a union, it is applied to each member independently (distributive behavior), producing a new union of the resulting types.",
+    "difficulty": 2,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "What TypeScript feature is essential for implementing a custom type definition that *recursively* unwraps nested arrays (e.g., a hypothetical `DeepFlatten<T>`)?",
+    "options": ["Mapped Types using 'keyof'", "Conditional Types using 'infer'", "Utility Types like 'Exclude'", "Type Guards using 'is'"],
+    "correctIndex": 1,
+    "explanation": "Recursive type definitions like `DeepFlatten<T>` rely on conditional types together with `infer` to detect when `T` is an array type and extract its element type for further unwrapping.",
+    "difficulty": 2,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "Which built-in utility type recursively unwraps nested Promise types?",
+    "options": ["UnwrapPromise<T>", "Awaited<T>", "PromiseType<T>", "Unpromise<T>"],
+    "correctIndex": 1,
+    "explanation": "`Awaited<T>` models the semantics of the `await` operator: it unwraps a `Promise` to its resolved type and even handles nested promises recursively.",
+    "difficulty": 2,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "Which mapped type makes all properties of T optional?",
+    "options": ["Partial<T>", "Required<T>", "Readonly<T>", "Omit<T, K>"],
+    "correctIndex": 0,
+    "explanation": "`Partial<T>` constructs a type with the same properties as `T` but marks each one as optional (`?`), useful for update payloads and configuration objects.",
+    "difficulty": 1,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "Which TypeScript feature allows creating specific string literal types based on template expressions?",
+    "options": ["concat", "template", "as", "template literal types"],
+    "correctIndex": 3,
+    "explanation": "Template Literal Types use backtick syntax (e.g. ``type Greeting< Name extends string > = `Hello ${Name}`;``) to compose new string literal types from existing literals.",
+    "difficulty": 2,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "In mapped types, which clause allows remapping property keys?",
+    "options": ["map", "as", "keyof", "infer"],
+    "correctIndex": 1,
+    "explanation": "The `as` clause in a mapped type (`{ [K in keyof T as NewKey<K>]: T[K] }`) lets you transform or rename each key when building the new type.",
+    "difficulty": 2,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "Which utility type picks a set of properties K from type T?",
+    "options": ["Omit<T, K>", "Pick<T, K>", "Extract<T, K>", "Exclude<T, K>"],
+    "correctIndex": 1,
+    "explanation": "`Pick<T, K>` constructs a new type by selecting only the properties in `K` from `T`, often used to expose or return a subset of fields.",
+    "difficulty": 1,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "What does the utility type Omit<T, K> do?",
+    "options": ["Removes properties K from T", "Makes properties K optional", "Picks only properties K", "Makes T readonly"],
+    "correctIndex": 0,
+    "explanation": "`Omit<T, K>` creates a type by excluding the properties in `K` from `T`, effectively the inverse of `Pick`.",
+    "difficulty": 1,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "Which utility type constructs an object type with keys K and values V?",
+    "options": ["Record<K, V>", "Map<K, V>", "Object<K, V>", "Dictionary<K, V>"],
+    "correctIndex": 0,
+    "explanation": "`Record<K, V>` builds a type whose keys are `K` (typically a union of string or number literals) and whose values are `V`, useful for dictionaries or maps.",
+    "difficulty": 1,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "Which utility type filters union U to only include types assignable to T?",
+    "options": ["Exclude<U, T>", "Extract<U, T>", "Omit<U, T>", "Pick<U, T>"],
+    "correctIndex": 1,
+    "explanation": "`Extract<U, T>` produces a subtype of `U` consisting only of those members assignable to `T`, filtering unwanted variants out of a union.",
+    "difficulty": 2,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "Which utility type filters U to only those types assignable to U?",
+    "options": ["Exclude<U, T>", "Extract<U, T>", "Omit<U, T>", "Pick<U, T>"],
+    "correctIndex": 1,
+    "explanation": "Similarly to the previous question, `Extract<U, U>` simply yields `U` itself, since it filters `U` to members assignable to `U` (i.e., all of them).",
+    "difficulty": 2,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "What does NonNullable<T> remove from type T?",
+    "options": ["never and void", "null and undefined", "any and unknown", "null and void"],
+    "correctIndex": 1,
+    "explanation": "`NonNullable<T>` excludes `null` and `undefined` from `T`, ensuring the resulting type cannot be nullish.",
+    "difficulty": 1,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "Which utility type extracts the return type of a function?",
+    "options": ["Parameters<T>", "ReturnType<T>", "InstanceType<T>", "Awaited<T>"],
+    "correctIndex": 1,
+    "explanation": "`ReturnType<T>` infers the type that a function `T` returns, useful for deriving types from existing functions.",
+    "difficulty": 1,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "Which operator retrieves the type of a property K in type T?",
+    "options": ["T[K]", "T.K", "T->K", "K in T"],
+    "correctIndex": 0,
+    "explanation": "The indexed access operator `T[K]` looks up the type of property `K` on type `T`, allowing dynamic type queries.",
+    "difficulty": 1,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "Which keyword produces a unique compile-time symbol type?",
+    "options": ["symbol", "unique symbol", "Symbol", "const symbol"],
+    "correctIndex": 1,
+    "explanation": "The `unique symbol` keyword declares a symbol constant whose type is a distinct singleton, enabling truly unique compile-time identifiers.",
+    "difficulty": 2,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "What interface models asynchronous iteration over type T?",
+    "options": ["Iterable<T>", "Iterator<T>", "AsyncIterable<T>", "Promise<T>"],
+    "correctIndex": 2,
+    "explanation": "`AsyncIterable<T>` defines the async iteration protocol (using `Symbol.asyncIterator`), allowing `for await...of` loops over promises of items.",
+    "difficulty": 2,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "Which single tsconfig flag enables all major strict type-checking options (like strictNullChecks, noImplicitAny)?",
+    "options": ["noImplicitAny", "strictNullChecks", "strict", "noImplicitThis"],
+    "correctIndex": 2,
+    "explanation": "`strict: true enables the full suite of strict type checking in TypeScript, including `strictNullChecks`, `noImplicitAny`, and more.",
+    "difficulty": 1,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "In strictNullChecks mode, which values are not assignable to other types without checks?",
+    "options": ["0 and ''", "null and undefined", "false and true", "NaN and Infinity"],
+    "correctIndex": 1,
+    "explanation": "With `strictNullChecks` on, `null` and `undefined` are only assignable to their respective types (or unions including them), preventing accidental nullish values in other types.",
+    "difficulty": 1,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "Which construct allows narrowing a union based on a literal property?",
+    "options": ["Type Guard", "Discriminated Union", "Mapped Type", "Intersection Type"],
+    "correctIndex": 1,
+    "explanation": "A discriminated union (also called a tagged union) uses a shared literal property key on each variant—e.g. `{ type: 'a'; ... } | { type: 'b'; ... }`—so that TypeScript can narrow the union in code based on that literal value.",
+    "difficulty": 2,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "What is the main difference between interface and type alias for objects?",
+    "options": ["Interfaces cannot merge", "Type aliases cannot merge", "Interfaces cannot extend", "Type aliases cannot represent unions"],
+    "correctIndex": 1,
+    "explanation": "Interfaces in TypeScript support declaration merging—multiple `interface Foo { ... }` blocks with the same name are merged—whereas type aliases cannot be reopened or merged once declared.",
+    "difficulty": 2,
+    "topic": "TypeScript"
+  },
+  {
+    "question": "Which tsconfig option enables generating declaration (.d.ts) files?",
+    "options": ["declaration", "emitDeclarationOnly", "declarationMap", "skipLibCheck"],
+    "correctIndex": 0,
+    "explanation": "Setting \"declaration\": true in your tsconfig.json tells the compiler to emit .d.ts declaration files alongside the compiled JavaScript output.",
+    "difficulty": 1,
+    "topic": "Build Tools"
+  },
+  {
+    "question": "What does the composite flag in tsconfig allow?",
+    "options": ["Incremental compilation only", "Library deletion", "Project references", "Code splitting"],
+    "correctIndex": 2,
+    "explanation": "The \"composite\": true option marks a project as buildable and referenceable by other TypeScript projects, enabling `tsc --build` to orchestrate multi-project builds via Project References.",
+    "difficulty": 2,
+    "topic": "Build Tools"
+  },
+  {
+    "question": "Which two tsconfig options configure path mapping for cleaner imports?",
+    "options": ["paths & baseUrl", "rootDir & outDir", "declarationMap & sourceMap", "strict & skipLibCheck"],
+    "correctIndex": 0,
+    "explanation": "`baseUrl` sets the root directory for module resolution and `paths` defines alias patterns (e.g. `\"@/*\": [\"src/*\"]`), allowing absolute or aliased imports instead of long relative paths.",
+    "difficulty": 2,
+    "topic": "Build Tools"
+  },
+  {
+    "question": "What flag skips type checking of declaration files to speed up builds?",
+    "options": ["skipLibCheck", "skipDefaultLibCheck", "noEmit", "isolatedModules"],
+    "correctIndex": 0,
+    "explanation": "Enabling \"skipLibCheck\": true tells the TypeScript compiler to skip type checking of all .d.ts files, which can significantly reduce build times on large projects.",
+    "difficulty": 1,
+    "topic": "Build Tools"
+  },
+  {
+    "question": "Which tsconfig flag enforces each file to be transpilable in isolation?",
+    "options": ["isolatedModules", "incremental", "composite", "noEmitOnError"],
+    "correctIndex": 0,
+    "explanation": "The \"isolatedModules\": true option ensures that each file can be transpiled by a single-file transpiler (like Babel), disallowing certain TypeScript-only constructs that Babel cannot handle correctly.",
+    "difficulty": 2,
+    "topic": "Build Tools"
+  },
+  {
+    "question": "Which tsconfig setting enables tracing of module resolution paths?",
+    "options": ["resolveJsonModule", "traceResolution", "diagnostics", "listFiles"],
+    "correctIndex": 1,
+    "explanation": "Setting \"traceResolution\": true in tsconfig.json outputs detailed logs of how TypeScript resolves module imports, helping debug issues with `paths`, `baseUrl`, and node module lookup.",
+    "difficulty": 3,
+    "topic": "Build Tools"
+  },
+  {
+    "question": "What CLI flag shows performance metrics for each tsc compilation phase?",
+    "options": ["--diagnostics", "--verbose", "--showConfig", "--listEmittedFiles"],
+    "correctIndex": 0,
+    "explanation": "Running `tsc --diagnostics` prints CPU time and memory usage for each compilation phase (parsing, binding, checking, emitting), useful for identifying performance bottlenecks.",
+    "difficulty": 2,
+    "topic": "Build Tools"
+  },
+  {
+    "question": "Which React type represents a function component with props P?",
+    "options": ["React.FunctionComponent<P>", "React.FC<P>", "Both of the above", "React.Component<P>"],
+    "correctIndex": 2,
+    "explanation": "`React.FunctionComponent<P>` and its alias `React.FC<P>` are equivalent TypeScript definitions for a React function component accepting props of type `P`.",
+    "difficulty": 1,
+    "topic": "React"
+  },
+  {
+    "question": "How do you type a useState hook for a number state?",
+    "options": ["useState<number>(0)", "useState(0)", "useState<string>(0)", "useState<any>(0)"],
+    "correctIndex": 0,
+    "explanation": "Calling `useState<number>(0)` explicitly tells TypeScript that the state variable is of type `number`, ensuring type safety when updating and reading the state.",
+    "difficulty": 1,
+    "topic": "React"
+  },
+  {
+    "question": "Which event type is used for typing an input change in React?",
+    "options": ["React.SyntheticEvent", "React.ChangeEvent<HTMLInputElement>", "Event<HTMLInputElement>", "React.InputEvent"],
+    "correctIndex": 1,
+    "explanation": "`React.ChangeEvent<HTMLInputElement>` is the correct type for the `onChange` handler of an `<input>` element, exposing the `target.value` property with proper typing.",
+    "difficulty": 1,
+    "topic": "React"
+  },
+  {
+    "question": "What library can generate TypeScript types from a GraphQL schema?",
+    "options": ["GraphQL Code Generator", "Apollo Client", "TypeGraphQL", "GraphQL-CLI"],
+    "correctIndex": 0,
+    "explanation": "GraphQL Code Generator reads your GraphQL schema (and operations) to auto-generate strongly typed TypeScript definitions and hooks for queries, mutations, and subscriptions.",
+    "difficulty": 2,
+    "topic": "API"
+  },
+  {
+    "question": "Which framework allows end-to-end type safety without a schema file?",
+    "options": ["REST", "GraphQL", "tRPC", "Swagger"],
+    "correctIndex": 2,
+    "explanation": "tRPC uses TypeScript itself as its schema definition language, enabling you to build fully type-safe client and server code without maintaining a separate GraphQL or OpenAPI schema.",
+    "difficulty": 2,
+    "topic": "API"
+  },
+  {
+    "question": "Which runtime-validation library derives TS types from schemas?",
+    "options": ["jest", "Zod", "Mocha", "Joi"],
+    "correctIndex": 1,
+    "explanation": "Zod allows you to define schemas at runtime and infer the corresponding TypeScript types via `z.infer<typeof schema>`, ensuring your types stay in sync with validation logic.",
+    "difficulty": 2,
+    "topic": "API"
+  },
+  {
+    "question": "What command builds all referenced projects in TypeScript?",
+    "options": ["tsc --build", "tsc --all", "tsc --composite", "tsc --incremental"],
+    "correctIndex": 0,
+    "explanation": "`tsc --build` (or `tsc -b`) reads project references from `tsconfig.json` and builds each referenced project in dependency order, enabling fast incremental builds.",
+    "difficulty": 2,
+    "topic": "Build Tools"
+  },
+  {
+    "question": "What file extension or base name is typically used for TypeScript's incremental compilation cache?",
+    "options": ["tsconfig.json", ".tsbuildinfo", "package.json", ".cache"],
+    "correctIndex": 1,
+    "explanation": "TypeScript writes a `.tsbuildinfo` file alongside your output to store information about prior compilations, speeding up subsequent incremental builds.",
+    "difficulty": 2,
+    "topic": "Build Tools"
+  },
+  {
+    "question": "What are the three main phases of the TypeScript compiler?",
+    "options": ["Parse, Check, Emit", "Lint, Test, Build", "Write, Bundle, Deploy", "Compile, Link, Execute"],
+    "correctIndex": 0,
+    "explanation": "The TypeScript compiler pipeline consists of parsing source code into an AST, performing type checking (semantic analysis), and emitting JavaScript plus declaration files.",
+    "difficulty": 1,
+    "topic": "Build Tools"
+  },
+  {
+    "question": "Which Node.js flag enabled experimental ES modules in v12?",
+    "options": ["--experimental-modules", "--esModuleInterop", "--enable-esm", "--allowEsm"],
+    "correctIndex": 0,
+    "explanation": "Before ES modules were fully supported, Node.js v12 required the `--experimental-modules` flag (and the `.mjs` extension) to use `import`/`export` syntax.",
+    "difficulty": 2,
+    "topic": "Node.js"
+  },
+  {
+    "question": "Which Hook lets function components have state?",
+    "options": ["useEffect", "useState", "useReducer", "useRef"],
+    "correctIndex": 1,
+    "explanation": "`useState` is the built-in React Hook that allows functional components to hold and update state across renders.",
+    "difficulty": 1,
+    "topic": "React Hooks"
+  },
+  {
+    "question": "What Hook manages side effects and runs after render?",
+    "options": ["useLayoutEffect", "useEffect", "useMemo", "useCallback"],
+    "correctIndex": 1,
+    "explanation": "The useEffect Hook lets you perform side effects—such as data fetching, subscriptions, or manually changing the DOM—after React has updated the UI in the browser. It runs after each completed render unless you provide a dependency array.",
+    "difficulty": 1,
+    "topic": "React Hooks"
+  },
+  {
+    "question": "In useEffect, when does the cleanup function run?",
+    "options": ["After first render", "Only on unmount", "Before re-running and on unmount", "Never"],
+    "correctIndex": 2,
+    "explanation": "When you return a cleanup function from useEffect, React calls it before the next effect execution (if dependencies change) and when the component unmounts, ensuring subscriptions or timers are properly cleared.",
+    "difficulty": 2,
+    "topic": "React Hooks"
+  },
+  {
+    "question": "Which Hook provides Redux-like state logic inside a component?",
+    "options": ["useState", "useReducer", "useContext", "useEffect"],
+    "correctIndex": 1,
+    "explanation": "useReducer accepts a reducer function and initial state, returning [state, dispatch]. It’s designed for complex state logic—similar to Redux—but scoped to a single component.",
+    "difficulty": 1,
+    "topic": "React Hooks"
+  },
+  {
+    "question": "What does useMemo cache between renders?",
+    "options": ["DOM nodes", "Function definitions", "Expensive values", "Event handlers"],
+    "correctIndex": 2,
+    "explanation": "useMemo caches the result of an expensive computation and only recomputes it when its dependency array changes, avoiding unnecessary recalculations on every render.",
+    "difficulty": 1,
+    "topic": "React Hooks"
+  },
+  {
+    "question": "Which Hook memoizes a function reference?",
+    "options": ["useMemo", "useCallback", "useRef", "useLayoutEffect"],
+    "correctIndex": 1,
+    "explanation": "useCallback returns a memoized version of the callback that only changes if one of its dependencies has changed, preventing function re-creations across renders.",
+    "difficulty": 1,
+    "topic": "React Hooks"
+  },
+  {
+    "question": "What Hook gives you a mutable ref object without re-render?",
+    "options": ["useState", "useRef", "useReducer", "useMemo"],
+    "correctIndex": 1,
+    "explanation": "useRef returns a mutable ref object whose .current property persists across renders without causing re-renders when mutated, ideal for storing DOM references or mutable values.",
+    "difficulty": 1,
+    "topic": "React Hooks"
+  },
+  {
+    "question": "Custom Hooks must start with which prefix?",
+    "options": ["get", "fetch", "use", "hook"],
+    "correctIndex": 2,
+    "explanation": "By convention React enforces that custom Hook names must start with 'use' so that the linter can automatically check for Hook rules (e.g., only calling Hooks at the top level).",
+    "difficulty": 1,
+    "topic": "React Hooks"
+  },
+  {
+    "question": "Which React component pattern implicitly shares state between related parent and child components, often using Context?",
+    "options": ["Render Props", "Compound Components", "Higher-Order Components", "Portals"],
+    "correctIndex": 1,
+    "explanation": "Compound Components use React context internally so that child components can access shared state provided by the parent without prop drilling.",
+    "difficulty": 2,
+    "topic": "Component Patterns"
+  },
+  {
+    "question": "In a controlled input component, value is driven by what?",
+    "options": ["DOM", "State", "Context", "Ref"],
+    "correctIndex": 1,
+    "explanation": "A controlled component’s input value is driven by React state: you set the input’s value prop to state and update state via onChange, ensuring React is the single source of truth.",
+    "difficulty": 1,
+    "topic": "Component Patterns"
+  },
+  {
+    "question": "Which React pattern involves passing a function as a prop (often named 'render' or 'children') to share rendering logic?",
+    "options": ["Render Prop", "Higher-Order Component", "Compound Component", "Custom Hook"],
+    "correctIndex": 0,
+    "explanation": "The Render Prop pattern has a component accept a function prop that returns React elements, allowing dynamic rendering logic to be shared across components.",
+    "difficulty": 2,
+    "topic": "Component Patterns"
+  },
+  {
+    "question": "What API shares global state without prop drilling?",
+    "options": ["Flux", "Context API", "Redux", "MobX"],
+    "correctIndex": 1,
+    "explanation": "React’s Context API lets you provide a value at a top-level component and consume it in any descendant, avoiding manual prop passing through intermediate components.",
+    "difficulty": 1,
+    "topic": "Context & State"
+  },
+  {
+    "question": "Which Hook reads context values in functional components?",
+    "options": ["useContext", "useState", "useReducer", "useEffect"],
+    "correctIndex": 0,
+    "explanation": "useContext(ContextObject) subscribes the component to the nearest provider for that ContextObject, returning its current value.",
+    "difficulty": 1,
+    "topic": "Context & State"
+  },
+  {
+    "question": "Which component wrapper skips re-render when props unchanged?",
+    "options": ["React.memo", "React.lazy", "React.Suspense", "React.Fragment"],
+    "correctIndex": 0,
+    "explanation": "React.memo is a higher-order component that memoizes the rendered output and uses shallow comparison on props to skip re-renders when props remain the same.",
+    "difficulty": 1,
+    "topic": "Performance"
+  },
+  {
+    "question": "useCallback and useMemo help avoid what?",
+    "options": ["HTTP requests", "Recomputations and re-renders", "Routing issues", "State leaks"],
+    "correctIndex": 1,
+    "explanation": "Both Hooks memoize values or functions so React can skip expensive recalculations or avoid passing new references that trigger child re-renders.",
+    "difficulty": 1,
+    "topic": "Performance"
+  },
+  {
+    "question": "Which API splits code into on-demand chunks?",
+    "options": ["React.lazy", "React.memo", "React.Fragment", "React.Suspense"],
+    "correctIndex": 0,
+    "explanation": "React.lazy enables dynamic import() of component modules, causing Webpack or another bundler to generate separate chunks loaded on demand.",
+    "difficulty": 1,
+    "topic": "Performance"
+  },
+  {
+    "question": "What component shows fallback UI during lazy load?",
+    "options": ["ErrorBoundary", "React.Fragment", "React.Suspense", "React.StrictMode"],
+    "correctIndex": 2,
+    "explanation": "React.Suspense lets you specify a fallback prop to display while a lazy-loaded component (via React.lazy) is being fetched.",
+    "difficulty": 1,
+    "topic": "Performance"
+  },
+  {
+    "question": "Proper key props in lists avoid what issue?",
+    "options": ["Memory leaks", "Unnecessary re-renders", "Type errors", "Security holes"],
+    "correctIndex": 1,
+    "explanation": "Keys help React identify which items have changed in a list, so using stable keys avoids extra re-renders and preserves component state across updates.",
+    "difficulty": 1,
+    "topic": "Performance"
+  },
+  {
+    "question": "What Hook marks updates as low-priority transitions?",
+    "options": ["useDeferredValue", "useLayoutEffect", "useEffect", "startTransition"],
+    "correctIndex": 3,
+    "explanation": "startTransition (from the useTransition Hook) lets you mark state updates as non-urgent, so React can keep the UI responsive by deferring these updates when more urgent work arrives.",
+    "difficulty": 2,
+    "topic": "Concurrency"
+  },
+  {
+    "question": "Which Hook returns a deferred version of a value?",
+    "options": ["useTransition", "useDeferredValue", "useEffect", "useLayoutEffect"],
+    "correctIndex": 1,
+    "explanation": "useDeferredValue accepts a value and returns a deferred version that lags behind when the UI is busy, smoothing out rendering of expensive content.",
+    "difficulty": 2,
+    "topic": "Concurrency"
+  },
+  {
+    "question": "Automatic batching in React 18 groups multiple setState calls into one what?",
+    "options": ["Callback", "Render", "Effect", "Promise"],
+    "correctIndex": 1,
+    "explanation": "In React 18, automatic batching merges multiple state updates within the same event loop tick into a single render for improved performance.",
+    "difficulty": 2,
+    "topic": "Concurrency"
+  },
+  {
+    "question": "Which pattern handles errors during render in React?",
+    "options": ["Try/Catch", "Error Boundary", "useErrorHandler", "useEffect"],
+    "correctIndex": 1,
+    "explanation": "Error Boundaries are special React components that catch JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI instead of crashing the whole app. See: https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary",
+    "difficulty": 1,
+    "topic": "Error Handling"
+  },
+  {
+    "question": "Error Boundaries must be defined as what type of component?",
+    "options": ["Function", "Class", "Hook", "Context"],
+    "correctIndex": 1,
+    "explanation": "Error Boundaries must be class components because only class components can implement the lifecycle methods (componentDidCatch and getDerivedStateFromError) required for error handling in React. See: https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary",
+    "difficulty": 1,
+    "topic": "Error Handling"
+  },
+  {
+    "question": "What method logs error info in Error Boundaries?",
+    "options": ["componentDidMount", "componentDidCatch", "getDerivedStateFromError", "render"],
+    "correctIndex": 1,
+    "explanation": "The componentDidCatch lifecycle method is used in Error Boundaries to catch errors in the component tree below them and log error information or perform side effects. See: https://react.dev/reference/react/Component#componentdidcatch",
+    "difficulty": 2,
+    "topic": "Error Handling"
+  },
+  {
+    "question": "Which library provides a reusable Error Boundary for functions?",
+    "options": ["react-error-boundary", "react-router", "redux", "formik"],
+    "correctIndex": 0,
+    "explanation": "The react-error-boundary library provides a reusable Error Boundary component that can be used in function components, making error handling easier without writing your own class component. See: https://github.com/bvaughn/react-error-boundary",
+    "difficulty": 2,
+    "topic": "Error Handling"
+  },
+  {
+    "question": "Which practice prefers small focused components and custom hooks?",
+    "options": ["Inheritance", "Composition", "Mixins", "Global state"],
+    "correctIndex": 1,
+    "explanation": "Composition in React means building complex UIs by combining small, focused components and custom hooks, which promotes code reuse and maintainability. See: https://react.dev/learn/passing-props-to-a-component#passing-jsx-as-children",
+    "difficulty": 1,
+    "topic": "Best Practices"
+  },
+  {
+    "question": "To avoid prop drilling, one can use what?",
+    "options": ["Refs", "Context", "Callbacks", "Redux only"],
+    "correctIndex": 1,
+    "explanation": "The React Context API allows you to share values (like state or functions) deeply throughout the component tree without passing props at every level, thus avoiding prop drilling. See: https://react.dev/reference/react/Context",
+    "difficulty": 1,
+    "topic": "Best Practices"
+  },
+  {
+    "question": "What tool in React DevTools highlights performance bottlenecks?",
+    "options": ["Profiler", "Console", "Elements", "Network"],
+    "correctIndex": 0,
+    "explanation": "The Profiler tab in React DevTools helps developers measure component render times and identify performance bottlenecks in React applications. See: https://react.dev/reference/react/Profiler",
+    "difficulty": 1,
+    "topic": "Debugging & Testing"
+  },
+  {
+    "question": "Which testing library emphasizes testing behavior over implementation?",
+    "options": ["Enzyme", "React Testing Library", "Mocha", "Chai"],
+    "correctIndex": 1,
+    "explanation": "React Testing Library encourages testing components from the user’s perspective by focusing on behavior and accessible queries, rather than testing internal implementation details. See: https://testing-library.com/docs/intro/",
+    "difficulty": 1,
+    "topic": "Debugging & Testing"
+  },
+  {
+    "question": "Which runner is known for fast ESM-first tests?",
+    "options": ["Jest", "Mocha", "Vitest", "Tape"],
+    "correctIndex": 2,
+    "explanation": "Vitest is a modern test runner that is fast and built for native ES modules (ESM) support, making it ideal for projects using modern JavaScript and TypeScript. See: https://vitest.dev/",
+    "difficulty": 2,
+    "topic": "Debugging & Testing"
+  },
+  {
+    "question": "To simulate user clicks in tests you use what?",
+    "options": ["fireEvent", "shallow", "mount", "renderIntoDocument"],
+    "correctIndex": 0,
+    "explanation": "The fireEvent utility from React Testing Library is used to simulate user interactions such as clicks, typing, and more in tests. See: https://testing-library.com/docs/dom-testing-library/api-events/",
+    "difficulty": 1,
+    "topic": "Debugging & Testing"
+  },
+  {
+    "question": "Which E2E tool runs tests in a real browser environment?",
+    "options": ["Jest", "React Testing Library", "Cypress", "Mocha"],
+    "correctIndex": 2,
+    "explanation": "Cypress is an end-to-end (E2E) testing tool that runs tests in a real browser, providing interactive debugging and a user-friendly interface. See: https://docs.cypress.io/guides/overview/why-cypress",
+    "difficulty": 2,
+    "topic": "Debugging & Testing"
+  },
+  {
+    "question": "When typing props for a functional component using an interface 'Props', which TypeScript syntax is commonly used?",
+    "options": ["createContext<Props>", "React.FC<Props>", "useState<Props>", "useEffect<Props>"],
+    "correctIndex": 1,
+    "explanation": "React.FC<Props> is a common TypeScript syntax for typing the props of a functional component, ensuring type safety for component properties. See: https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/function_components/",
+    "difficulty": 1,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "To type a state that may be null, you specify useState with what signature?",
+    "options": ["useState(null)", "useState<Type | null>(null)", "useState<any>(null)", "useState<Type>()"],
+    "correctIndex": 1,
+    "explanation": "useState<Type | null>(null) is the correct way to type a state variable that can be either a value of Type or null in TypeScript. See: https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/hooks/",
+    "difficulty": 2,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "Typing an input ref, you use useRef with which generic?",
+    "options": ["HTMLDivElement", "HTMLInputElement", "HTMLElement", "React.Ref"],    
+    "correctIndex": 1,
+    "explanation": "When typing an input ref in React with TypeScript, useRef<HTMLInputElement>(null) is used to ensure the ref is correctly typed for an input element. See: https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/refs/",
+    "difficulty": 2,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "Which tsconfig jsx option enables new JSX transform?",
+    "options": ["react", "react-jsx", "preserve", "react-native"],    
+    "correctIndex": 1,
+    "explanation": "The react-jsx option in tsconfig.json enables the new JSX transform introduced in React 17, allowing improved compilation and automatic JSX runtime. See: https://www.typescriptlang.org/tsconfig#jsx",
+    "difficulty": 2,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "If you needed to get the current window width, which React pattern would you typically use to encapsulate the logic?",
+    "options": ["Context API", "Higher-Order Component", "Custom Hook", "Render Prop"],
+    "correctIndex": 2, 
+    "explanation": "A custom hook is the recommended React pattern for encapsulating reusable logic, such as tracking window width, across multiple components. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 2,
+    "topic": "Custom Hooks"
+  },
+  {
+    "question": "Which Hook runs synchronously after all DOM mutations?",
+    "options": ["useEffect", "useLayoutEffect", "useDeferredValue", "useMemo"],    
+    "correctIndex": 1,
+    "explanation": "useLayoutEffect runs synchronously after all DOM mutations but before the browser repaints, making it suitable for reading layout and synchronously re-rendering. See: https://react.dev/reference/react/useLayoutEffect",
+    "difficulty": 2,
+    "topic": "Advanced Hooks"
+  },
+  {
+    "question": "Which Hook can avoid stale closures by capturing fresh values?",
+    "options": ["useCallback", "useRef", "useEffect", "useMemo"],
+    "correctIndex": 0,
+    "explanation": "useCallback returns a memoized callback that always captures the latest values from its dependencies, helping avoid stale closures in event handlers and effects. See: https://react.dev/reference/react/useCallback",
+    "difficulty": 2,
+    "topic": "Advanced Hooks"
+  },
+  {
+    "question": "Which Component wrapper suspends on thrown Promises for data fetching?",
+    "options": ["React.lazy", "ErrorBoundary", "React.Suspense", "React.Fragment"],    
+    "correctIndex": 2,
+    "explanation": "React.Suspense can suspend rendering while waiting for a Promise to resolve, such as during code or data fetching, and show a fallback UI in the meantime. See: https://react.dev/reference/react/Suspense",
+    "difficulty": 2,
+    "topic": "Concurrency"
+  },
+  {
+    "question": "Which React mode warns about unsafe lifecycle usage and legacy APIs?",
+    "options": ["ConcurrentMode", "StrictMode", "DevMode", "Profiler"],
+    "correctIndex": 1,
+    "explanation": "StrictMode is a development-only React component that highlights potential problems, such as unsafe lifecycle methods and deprecated APIs. See: https://react.dev/reference/react/StrictMode",
+    "difficulty": 1,
+    "topic": "Best Practices"
+  },
+  {
+    "question": "What is a common pattern for extracting reusable data fetching logic in React functional components?",
+    "options": ["useData", "useFetch", "useQuery", "useEffect"],    
+    "correctIndex": 1,
+    "explanation": "A custom hook (such as useFetch) is a common pattern for extracting and reusing data fetching logic across multiple functional components in React. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 2,
+    "topic": "Custom Hooks"
+  },
+  {
+    "question": "Which testing approach focuses on user interactions and accessibility?",
+    "options": ["Snapshot Testing", "Unit Testing", "Behavioral Testing", "Integration Testing"],    
+    "correctIndex": 2,
+    "explanation": "Behavioral Testing emphasizes testing the application from the user's perspective, focusing on user interactions and accessibility, rather than internal implementation. See: https://testing-library.com/docs/queries/about/#priority",
+    "difficulty": 2,
+    "topic": "Debugging & Testing"
+  },
+  {
+    "question": "Which Hook should you list all reactive values in to avoid stale data?",
+    "options": ["useEffect", "useMemo", "useCallback", "useReducer"],    
+    "correctIndex": 0,
+    "explanation": "All reactive values used inside useEffect should be listed in its dependency array to avoid stale data and ensure effects run when needed. See: https://react.dev/reference/react/useEffect#specifying-reactive-dependencies",
+    "difficulty": 2,
+    "topic": "React Hooks"
+  },
+  {
+    "question": "Which are common approaches for styling React components that help scope styles and avoid inline style objects?",
+    "options": ["CSS-in-JS", "Styled Components", "CSS Modules", "All of the above"],    
+    "correctIndex": 3,
+    "explanation": "CSS-in-JS, Styled Components, and CSS Modules are all popular approaches for scoping styles to components and avoiding global or inline style issues in React. See: https://react.dev/learn/styling-your-components",
+    "difficulty": 2,
+    "topic": "Best Practices"
+  },
+  {
+    "question": "Which Hook can you use to avoid blocking the UI during expensive updates?",
+    "options": ["useDeferredValue", "useLayoutEffect", "useEffect", "useTransition"],    
+    "correctIndex": 3,
+    "explanation": "useTransition is a React Hook that allows you to mark certain updates as non-urgent, enabling the UI to remain responsive during expensive state transitions. See: https://react.dev/reference/react/useTransition",
+      "difficulty": 2,
+    "topic": "Concurrency"
+  },
+  {
+    "question": "Which hook-based pattern replaced many render-prop use cases?",
+    "options": ["Custom Hook", "HOC", "Render Prop", "Context"],
+    "correctIndex": 0,
+    "explanation": "Custom Hooks allow you to reuse stateful logic across components, replacing many use cases that previously required render props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 2,
+    "topic": "Component Patterns"
+  },
+  {
+    "question": "What React API lets you add a ref to any DOM element?",
+    "options": ["useState", "useRef", "useCallback", "useMemo"],    
+    "correctIndex": 1,
+    "explanation": "The useRef Hook lets you add a ref to any DOM element, enabling direct access to the underlying DOM node. See: https://react.dev/reference/react/useRef",
+    "difficulty": 1,
+    "topic": "Advanced Hooks"
+  },
+  {
+    "question": "Which Hook optimizes large lists by memoizing row renderers?",
+    "options": ["useMemo", "useCallback", "useLayoutEffect", "useReducer"],    
+    "correctIndex": 1,
+    "explanation": "useCallback memoizes functions, such as row renderers, to prevent unnecessary re-creations and optimize performance in large lists. See: https://react.dev/reference/react/useCallback",
+    "difficulty": 3,
+    "topic": "Performance"
+  },
+  {
+    "question": "Which API lets you defer part of the UI until data loads?",
+    "options": ["React.lazy", "useDeferredValue", "useEffect", "React.Suspense"],    
+    "correctIndex": 3,
+    "explanation": "React.Suspense lets you defer rendering part of the UI until asynchronous data or code has loaded, showing a fallback in the meantime. See: https://react.dev/reference/react/Suspense",
+    "difficulty": 2,
+    "topic": "Concurrency"
+  },
+  {
+    "question": "What mechanism avoids recreating handlers on every render?",
+    "options": ["useMemo", "useCallback", "useRef", "useEffect"],    
+    "correctIndex": 1,
+    "explanation": "useCallback memoizes callback functions, so handlers are not recreated on every render unless their dependencies change. See: https://react.dev/reference/react/useCallback",
+    "difficulty": 2,
+    "topic": "Performance"
+  },
+  {
+    "question": "Which Hook runs after every render by default unless you provide a dependency array?",
+    "options": ["useLayoutEffect", "useEffect", "useState", "useReducer"],
+    "correctIndex": 1,
+    "explanation": "useEffect runs after every render by default, but you can control when it runs by specifying a dependency array. See: https://react.dev/reference/react/useEffect",
+    "difficulty": 1,
+    "topic": "React Hooks"
+  },
+  {
+    "question": "What argument do you pass to useEffect to run it only once on mount?",
+    "options": ["[]", "[true]", "[null]", "[undefined]"],
+    "correctIndex": 0,
+    "explanation": "Passing an empty array ([]) as the dependency argument to useEffect ensures it runs only once after the initial mount. See: https://react.dev/reference/react/useEffect#firing-an-effect-once-only-on-mount",
+    "difficulty": 1,
+    "topic": "React Hooks"
+  },
+  {
+    "question": "Which Hook would you use to manage focus on a DOM element?",
+    "options": ["useState", "useRef", "useEffect", "useMemo"],
+    "correctIndex": 1,
+    "explanation": "useRef lets you persist a reference to a DOM element, making it easy to manage focus programmatically. See: https://react.dev/reference/react/useRef",
+    "difficulty": 1,
+    "topic": "Advanced Hooks"
+  },
+  {
+    "question": "Which Hook helps avoid passing new callback references to children every render?",
+    "options": ["useCallback", "useReducer", "useMemo", "useRef"],
+    "correctIndex": 0,
+    "explanation": "useCallback memoizes callback functions so that their reference remains stable between renders unless dependencies change, avoiding unnecessary re-renders in children. See: https://react.dev/reference/react/useCallback",
+    "difficulty": 1,
+    "topic": "Advanced Hooks"
+  },
+  {
+    "question": "What Hook would you use to compute a derived value only when dependencies change?",
+    "options": ["useMemo", "useEffect", "useCallback", "useLayoutEffect"],
+    "correctIndex": 0,
+    "explanation": "useMemo memoizes a computed value and only recalculates it when its dependencies change, optimizing performance. See: https://react.dev/reference/react/useMemo",
+    "difficulty": 1,
+    "topic": "Advanced Hooks"
+  },
+  {
+    "question": "Which Hook returns a state and a dispatch function based on a reducer?",
+    "options": ["useState", "useReducer", "useContext", "useEffect"],
+    "correctIndex": 1,
+    "explanation": "useReducer returns a state value and a dispatch function, letting you manage complex state logic with reducers. See: https://react.dev/reference/react/useReducer",
+    "difficulty": 1,
+    "topic": "Advanced Hooks"
+  },
+  {
+    "question": "Custom Hooks must follow which rule?",
+    "options": ["Call only in classes", "Call at top level of a component or another hook", "Call inside loops", "Call conditionally"],
+    "correctIndex": 1,
+    "explanation": "Custom Hooks must be called at the top level of a React function component or another custom hook, never inside loops or conditionals. See: https://react.dev/reference/react/hooks#rules-of-hooks",
+    "difficulty": 2,
+    "topic": "Advanced Hooks"
+  },
+  {
+    "question": "Which pattern uses a parent component to share state with multiple child components implicitly?",
+    "options": ["HOC", "Render Props", "Compound Components", "Portals"],
+    "correctIndex": 2,
+    "explanation": "Compound Components pattern allows a parent component to share state with its children implicitly, enabling coordinated behavior. See: https://kentcdodds.com/blog/compound-components-with-react-hooks",
+    "difficulty": 2,
+    "topic": "Component Patterns"
+  },
+  {
+    "question": "In controlled components, from where do you get the value of an input?",
+    "options": ["DOM element", "React state", "Context API", "Props only"],
+    "correctIndex": 1,
+    "explanation": "In controlled React components, the value of an input is derived from React state, not directly from the DOM. See: https://react.dev/learn/sharing-state-between-components#controlled-and-uncontrolled-components",
+    "difficulty": 1,
+    "topic": "Component Patterns"
+  },
+  {
+    "question": "Which React API allows you to pass a function as children for dynamic rendering?",
+    "options": ["Render Props", "Fragments", "Suspense", "StrictMode"],
+    "correctIndex": 0,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 2,
+    "topic": "Component Patterns"
+  },
+  {
+    "question": "Which function creates a Context object in React?",
+    "options": ["createStore", "createContext", "createHook", "createProvider"],
+    "correctIndex": 1,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 1,
+    "topic": "Context & State"
+  },
+  {
+    "question": "Which Hook do you use to consume a Context value?",
+    "options": ["useContext", "useStore", "useState", "useReducer"],
+    "correctIndex": 0,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 1,
+    "topic": "Context & State"
+  },
+  {
+    "question": "What Wrapper prevents re-render of a pure component when props stay the same?",
+    "options": ["React.Fragment", "React.memo", "React.lazy", "React.Suspense"],
+    "correctIndex": 1,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 1,
+    "topic": "Performance"
+  },
+  {
+    "question": "Lazy loading components in React requires which import method?",
+    "options": ["import()", "require()", "fetch()", "axios()"],
+    "correctIndex": 0,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 1,
+    "topic": "Performance"
+  },
+  {
+    "question": "Which component wraps lazy-loaded children to show a fallback UI?",
+    "options": ["ErrorBoundary", "Suspense", "StrictMode", "Profiler"],
+    "correctIndex": 1,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 1,
+    "topic": "Performance"
+  },
+  {
+    "question": "To identify slow renders, which tool in React DevTools do you use?",
+    "options": ["Profiler", "Elements", "Console", "Network"],
+    "correctIndex": 0,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 1,
+    "topic": "Debugging & Testing"
+  },
+  {
+    "question": "Which Hook would you use to measure layout effects synchronously after DOM updates?",
+    "options": ["useEffect", "useLayoutEffect", "useCallback", "useMemo"],
+    "correctIndex": 1,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 2,
+    "topic": "Advanced Hooks"
+  },
+  {
+    "question": "Which testing utility queries elements by user-facing text?",
+    "options": ["getByTestId", "getByRole", "getByText", "getByAltText"],
+    "correctIndex": 2,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 1,
+    "topic": "Debugging & Testing"
+  },
+  {
+    "question": "Which library provides React Testing Library?",
+    "options": ["@testing-library/react", "enzyme", "mocha", "jest"],
+    "correctIndex": 0,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 1,
+    "topic": "Debugging & Testing"
+  },
+  {
+    "question": "What function from RTL simulates user interactions?",
+    "options": ["simulateEvent", "fireEvent", "userEvent", "triggerEvent"],
+    "correctIndex": 1,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 1,
+    "topic": "Debugging & Testing"
+  },
+  {
+    "question": "Which tool is recommended for E2E testing in React apps?",
+    "options": ["React Testing Library", "Cypress", "Vitest", "Jest"],
+    "correctIndex": 1,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 2,
+    "topic": "Debugging & Testing"
+  },
+  {
+    "question": "Which Hook allows deferring a non-urgent update to keep the UI responsive?",
+    "options": ["useDeferredValue", "useLayoutEffect", "useMemo", "useEffect"],
+    "correctIndex": 0,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 2,
+    "topic": "Concurrency"
+  },
+  {
+    "question": "Which Hook returns a boolean indicating a transition is pending?",
+    "options": ["useIsPending", "useTransition", "useDeferredValue", "useCallback"],
+    "correctIndex": 1,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 2,
+    "topic": "Concurrency"
+  },
+  {
+    "question": "Automatic batching in React 18 groups state updates within what boundary?",
+    "options": ["setTimeout", "event handlers", "effects", "renders"],
+    "correctIndex": 1,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 2,
+    "topic": "Concurrency"
+  },
+  {
+    "question": "Error boundaries catch errors during which phase?",
+    "options": ["Render and lifecycle methods of child components", "Event handlers", "setTimeout callbacks", "Data fetching"],
+    "correctIndex": 0,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 2,
+    "topic": "Error Handling"
+  },
+  {
+    "question": "Which lifecycle method sets state from an error in an Error Boundary?",
+    "options": ["componentDidCatch", "getDerivedStateFromError", "componentDidMount", "render"],
+    "correctIndex": 1,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 2,
+    "topic": "Error Handling"
+  },
+  {
+    "question": "Which community library offers a reusable functional Error Boundary?",
+    "options": ["react-error-boundary", "redux", "formik", "react-router"],
+    "correctIndex": 0,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 2,
+    "topic": "Error Handling"
+  },
+  {
+    "question": "What concept involves splitting logic into container and presentational components?",
+    "options": ["Compound Components", "Separation of Concerns", "Render Props", "HOCs"],
+    "correctIndex": 1,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 2,
+    "topic": "Best Practices"
+  },
+  {
+    "question": "Which API helps avoid deeply nested prop passing for global state?",
+    "options": ["Redux only", "Context API", "Props drilling", "Fragments"],
+    "correctIndex": 1,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 1,
+    "topic": "Best Practices"
+  },
+  {
+    "question": "Which mode warns about deprecated lifecycle methods and legacy string refs?",
+    "options": ["StrictMode", "ConcurrentMode", "DevMode", "Profiler"],
+    "correctIndex": 0,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 1,
+    "topic": "Best Practices"
+  },
+  {
+    "question": "Which TypeScript type helps infer the type of a ref to an input element?",
+    "options": ["HTMLDivElement", "HTMLInputElement", "HTMLElement", "React.RefObject"],
+    "correctIndex": 1,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 2,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "What tsconfig jsx setting enables the new JSX transform?",
+    "options": ["react-jsx", "preserve", "react", "react-native"],
+    "correctIndex": 0,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 1,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "To type a functional component’s props, you can use which generic?",
+    "options": ["React.FC<Props>", "React.Component<Props>", "React.PureComponent<Props>", "React.Props<Props>"],
+    "correctIndex": 0,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 1,
+    "topic": "TypeScript & React"
+  },
+  {
+    "question": "Which hook pattern reduces code duplication for subscribing to window events?",
+    "options": ["Custom Hook", "HOC", "Render Prop", "Context"],
+    "correctIndex": 0,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 2,
+    "topic": "Custom Hooks"
+  },
+  {
+    "question": "What React pattern helps create reusable logic for tasks like listening to window events?",
+    "options": ["Custom Hook", "HOC", "Render Prop", "Context"],
+    "correctIndex": 0,
+    "explanation": "Creating a custom Hook (e.g., useWindowSize) encapsulates the setup and cleanup logic for window event listeners, making it reusable across components.",
+    "difficulty": 2,
+    "topic": "Custom Hooks"
+  },
+  {
+    "question": "Which function lets you lazy-load a component and name a fallback UI?",
+    "options": ["React.lazy and Suspense", "React.memo and Profiler", "useMemo and useCallback", "createPortal and StrictMode"],
+    "correctIndex": 0,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 1,
+    "topic": "Performance"
+  },
+  {
+    "question": "Which testing framework offers snapshot testing out of the box?",
+    "options": ["Jest", "Mocha", "Vitest", "Jasmine"],
+    "correctIndex": 0,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 1,
+    "topic": "Debugging & Testing"
+  },
+  {
+    "question": "Which modern React pattern often replaces older patterns like Higher-Order Components (HOCs) and Render Props for sharing reusable logic?",
+    "options": ["Custom Hook", "HOC", "Render Prop", "Context"],
+    "correctIndex": 0,
+    "explanation": "Custom Hooks are the modern React pattern for sharing reusable logic across components, often replacing older patterns like HOCs and Render Props. See: https://react.dev/learn/reusing-logic-with-custom-hooks",
+    "difficulty": 2,
+    "topic": "Component Patterns"
+  }
+  ]
